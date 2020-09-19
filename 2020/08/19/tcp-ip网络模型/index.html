@@ -165,7 +165,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-19 19:31" pubdate>
+      <time datetime="2020-08-19 19:36" pubdate>
         2020年8月19日 晚上
       </time>
     </span>
@@ -222,7 +222,7 @@
             <div class="markdown-body" id="post-body">
               <h2 id="tcp-ip-网络模型"><a href="#tcp-ip-网络模型" class="headerlink" title="tcp/ip 网络模型"></a>tcp/ip 网络模型</h2><p>分为五层，从上到下为应用层、传输层、网络层、数据链路层、物理层。</p>
 <h3 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h3><h4 id="http（超文本传输协议）"><a href="#http（超文本传输协议）" class="headerlink" title="http（超文本传输协议）"></a>http（超文本传输协议）</h4><p>可以通过<code>curl url -v</code>查看一次完整的http请求过程</p>
-<p><img src="/home/foon/.config/Typora/typora-user-images/image-20200919173124218.png" srcset="/img/loading.gif" alt="image-20200919173124218"> </p>
+<p><img src="image-20200919173124218.png" srcset="/img/loading.gif" alt="image-20200919173124218"> </p>
 <p>以上的流程可以总结为：</p>
 <p>1、和服务器的端口建立tcp链接（默认为80端口）</p>
 <p>2、发送http请求，包含请求头和请求体，请求头包含多个键值对<code>key1:value1</code>每行以<code>\r\n</code>分割，当遇到两个<code>\r\n</code>表示请求头的结束，接下来全是请求体</p>
@@ -253,7 +253,7 @@
 <p>对于监听状态的套接字，Recv-Q表示的是未完成队列中的连接个数，Send-Q表示的是未完成连接队列的最大连接限制个数</p>
 <p>对于已经建立的tcp连接，Recv-Q列表示的是recv buffer中还未被用户进程拷贝走的数据大小，</p>
 <p>Send-Q表示的是远程主机还未返回ACK消息的数据大小</p>
-<p><img src="/home/foon/.config/Typora/typora-user-images/image-20200919185139646.png" srcset="/img/loading.gif" alt="image-20200919185139646"> </p>
+<p><img src="image-20200919185139646.png" srcset="/img/loading.gif" alt="image-20200919185139646"> </p>
 <h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><h4 id="ip"><a href="#ip" class="headerlink" title="ip"></a>ip</h4><p>ipv4地址由32位二进制表示，也可以每八位一组来表示。</p>
 <p>IP地址范围为0.0.0.0-255.255.255.255</p>
 <p>其中10.0.0.0～10.255.255.255、172.16.0.0～172.16.255.255、192.168.0.0～192.168.255.255为内网地址，在公网上不分配，127开头的为环回地址，代表本机。</p>
@@ -268,6 +268,13 @@
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/web/">web</a>
+                    
+                  </div>
                 
               </div>
               
