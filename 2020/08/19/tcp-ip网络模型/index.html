@@ -229,7 +229,7 @@
 <p>3、服务器返回响应，包含响应头和响应体，格式与http请求基本相同</p>
 <p>4、和服务器断开tcp链接</p>
 <h4 id="dns（域名系统）"><a href="#dns（域名系统）" class="headerlink" title="dns（域名系统）"></a>dns（域名系统）</h4><p>由于32位二进制的ip地址十分难记，我们使用域名来方便记忆。但是计算机不认识域名，前辈们就开发了dns域名系统，实现域名和ip的转换。</p>
-<p>由于计算机无法理解dns系统之间的交流方式，所以通常通过一个resolver来和域名系统交流。我们将dns请求发给resolver,resolver来和dns交流，并返回给我们一个ip。查询域名为<a href="http://www.example.com的ip，完整的交流过程为：">www.example.com的ip，完整的交流过程为：</a></p>
+<p>由于计算机无法理解dns系统之间的交流方式，所以通常通过一个resolver来和域名系统交流。我们将dns请求发给resolver,resolver来和dns交流，并返回给我们一个ip。查询域名为 <a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> 的ip，完整的交流过程为：</p>
 <p>1、计算机将dns请求发给resolver</p>
 <p>2、resolver询问根服务器，根服务器不知道，但是.com服务器知道。</p>
 <p>3、于是resolver询问com服务器，com服务器表示exmaple.com知道</p>
