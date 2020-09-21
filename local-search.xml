@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>awk 用法</title>
+    <link href="/2020/08/22/awk-%E7%94%A8%E6%B3%95/"/>
+    <url>/2020/08/22/awk-%E7%94%A8%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h2 id="awk使用"><a href="#awk使用" class="headerlink" title="awk使用"></a>awk使用</h2><h3 id="0x1-格式"><a href="#0x1-格式" class="headerlink" title="0x1 格式"></a>0x1 格式</h3><p>awk 选项 ‘BEGIN{action} pattern1 &amp;&amp; pattern2 || pattern3{action1}pattern4{action2;action3}END{action}’ 文件</p><h3 id="0x2-执行流程"><a href="#0x2-执行流程" class="headerlink" title="0x2 执行流程"></a>0x2 执行流程</h3><p>awk首先执行BEGIN代码块</p><p>然后按照RS指定的分隔符从文件中读取文件，RS默认为\n,如果没有指定文件，则从标准输入读取</p><p>每读取一条记录</p><p>都将设置NR,FNR,RT,$0等变量</p><p>（默认）按照FS指定的分隔符分割字段，赋值给$1,$2,$3……$(NF-1),$NF,NF表示字段的个数</p><p>对main代码块的pattern进行匹配，匹配则执行action</p><p>执行END代码块</p><h3 id="0x3分割字段的方法"><a href="#0x3分割字段的方法" class="headerlink" title="0x3分割字段的方法"></a>0x3分割字段的方法</h3><p>在BEGIN中指定对每条记录都有效，</p><p><img src="image-20200921150511908.png" alt="image-20200921150511908"></p><p>在main代码块则只对第二条及以后有效。在对第n行的action中指定，只对对接下来的行有效。</p><p><img src="image-20200921150745821.png" alt="image-20200921150745821"></p><p>可以通过PARTITION[FS]查看</p><p><img src="image-20200921152241706.png" alt="image-20200921152241706"></p><h4 id="FS（默认）"><a href="#FS（默认）" class="headerlink" title="FS（默认）"></a>FS（默认）</h4><p>指定分隔符，默认为空格，默认情况下识别连续空格和其他空白符whitespace</p><p><img src="image-20200921151241855.png" alt="image-20200921151241855"></p><p><img src="image-20200921150949617.png" alt="image-20200921150949617"></p><p>FIELDWIDTHS</p><p>按字符格式分割字段 1 1:1代表第一个字段长度为1,跳过一个字符读取一个字符作为第二个字段，剩下的丢弃，字符读完为止</p><p><img src="image-20200921151549478.png" alt="image-20200921151549478"></p><p><img src="image-20200921151629782.png" alt="image-20200921151629782"></p><h4 id="FPAT"><a href="#FPAT" class="headerlink" title="FPAT"></a>FPAT</h4><p>按照正则表达式匹配字段</p><p><img src="image-20200921151823401.png" alt="image-20200921151823401"></p><h3 id="0x4-一些自带属性"><a href="#0x4-一些自带属性" class="headerlink" title="0x4 一些自带属性"></a>0x4 一些自带属性</h3><p>RS 记录分割     RT    输出时用RT记录进行连接</p><p>FS 字段分割    FT    输出时用FT字段进行连接，<code>，代表FT</code></p><p>FNR   单个输入的行号   NR  所有输入的行号</p><p>NF   字段数</p><p><img src="image-20200921152859320.png" alt="image-20200921152932083"></p><p>0x5 特殊的空值</p><p>awk代码块中未被赋值的参数，会根据它进行的操作是算数运算还是其他运算进行初始化。</p><p><img src="image-20200921153856329.png" alt="image-20200921153856329"></p><p>在处理第一行时，由于a为初始化，a可以为空字符串，0，false,由于前面进行了取反的布尔运算，所以a取false</p><p>取反后为True赋值给a,所以第一行pattern为真。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>shell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>owasp top 10</title>
     <link href="/2020/08/21/owasp-top-10/"/>
     <url>/2020/08/21/owasp-top-10/</url>

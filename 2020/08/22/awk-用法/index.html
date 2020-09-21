@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="foon">
   <meta name="keywords" content="">
-  <title>owasp top 10 - 小破站</title>
+  <title>awk 用法 - 小破站</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-21 14:40" pubdate>
-        2020年8月21日 下午
+      <time datetime="2020-08-22 15:40" pubdate>
+        2020年8月22日 下午
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      920 字
+      472 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      5
        分钟
     </span>
   
@@ -217,22 +217,42 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">owasp top 10</h1>
+            <h1 style="display: none">awk 用法</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="owasp-top10漏洞"><a href="#owasp-top10漏洞" class="headerlink" title="owasp top10漏洞"></a>owasp top10漏洞</h2><h3 id="0x1-注入（Injection）"><a href="#0x1-注入（Injection）" class="headerlink" title="0x1 注入（Injection）"></a>0x1 注入（Injection）</h3><p>注入漏洞，例如SQL,NOSQL,OS和LDAP注入，当不可信的数据被当作命令或者查询的一部分解析时出现。攻击者的恶意数据能够让解释器执行意料之外的命令或者绕过授权读取数据。</p>
-<h3 id="0x2-错误的身份验证-Broken-Authentication"><a href="#0x2-错误的身份验证-Broken-Authentication" class="headerlink" title="0x2 错误的身份验证(Broken Authentication)"></a>0x2 错误的身份验证(Broken Authentication)</h3><p>应用的有关身份验证和session管理的实现往往是错误的，这使得攻击者能拿到密码，keys,session tokens，或者让攻击者挖掘其他的漏洞，暂时或永久的冒充其他用户。</p>
-<h3 id="0x3-敏感信息泄露（Sensitive-Data-Exposure）"><a href="#0x3-敏感信息泄露（Sensitive-Data-Exposure）" class="headerlink" title="0x3 敏感信息泄露（Sensitive Data Exposure）"></a>0x3 敏感信息泄露（Sensitive Data Exposure）</h3><p>许多web应用和api没有正确的保护敏感数据，攻击者可能窃取或者修改这些未被保护好的数据，进行信用卡诈骗，身份窃取，或者其他的犯罪行为。敏感数据如果没有进行保护，例如静态、动态加密，在浏览器间传输时实行特别的预防措施，就很可能会泄露。</p>
-<h3 id="0x4-XXE（XML-External-Entities）"><a href="#0x4-XXE（XML-External-Entities）" class="headerlink" title="0x4 XXE（XML External Entities）"></a>0x4 XXE（XML External Entities）</h3><p>许多旧的、配置错误的XML处理器在xml文档里进行外部实体引用。外部实体能够被用来读取服务器内部的文件，通过file协议，还可以进行服务器端口扫描、远程代码执行、拒绝服务攻击。</p>
-<h3 id="0x5-错误的访问控制（Broken-Access-Control）"><a href="#0x5-错误的访问控制（Broken-Access-Control）" class="headerlink" title="0x5 错误的访问控制（Broken Access Control）"></a>0x5 错误的访问控制（Broken Access Control）</h3><p>被授权用户的行为往往没有被正确的限制。攻击者可以利用这些漏洞访问未授权的功能，或者读取不属于他的数据，例如访问其他用户的帐号，访问敏感文件，修改其他用户的数据，更改访问权限等</p>
-<h3 id="0x6-错误的安全配置（Security-Misconfiguration）"><a href="#0x6-错误的安全配置（Security-Misconfiguration）" class="headerlink" title="0x6 错误的安全配置（Security Misconfiguration）"></a>0x6 错误的安全配置（Security Misconfiguration）</h3><p>错误的安全配置是最常见的问题。往往是由于使用了默认的不安全的配置。厂商不仅需要根据不同操作系统、框架、库和应用来进行安全配置，而且这些配置要按时更新，打补丁。</p>
-<h3 id="0x7跨站脚本攻击（Cross-Site-Scripting-Xss）"><a href="#0x7跨站脚本攻击（Cross-Site-Scripting-Xss）" class="headerlink" title="0x7跨站脚本攻击（Cross-Site Scripting Xss）"></a>0x7跨站脚本攻击（Cross-Site Scripting Xss）</h3><p>XSS漏洞的存在</p>
-<p>1、在新的web页面包含不可信的数据，没有进行正确的验证和转义</p>
-<p>2、通过可以创建HTML或者JS的浏览器API，用用户提交的数据更新web页面</p>
-<p>XSS让攻击者能够在victim的浏览器上执行代码，XSS能够劫持用户的session,污染网站，或者将用户重定向到恶意网站（可以和CSRF漏洞配合）</p>
-<h3 id="0x8不安全的反序列化（Insecure-Deserialization）"><a href="#0x8不安全的反序列化（Insecure-Deserialization）" class="headerlink" title="0x8不安全的反序列化（Insecure Deserialization）"></a>0x8不安全的反序列化（Insecure Deserialization）</h3><p>不安全的反序列化往往导致了远程代码执行。即使反序列化漏洞没有导致远程代码执行，也能够被用来辅助攻击，包括重放攻击，注入攻击，越权攻击</p>
-<h3 id="0x9使用有公开漏洞的组件（Using-Components-with-Known-Vulnerablilities）"><a href="#0x9使用有公开漏洞的组件（Using-Components-with-Known-Vulnerablilities）" class="headerlink" title="0x9使用有公开漏洞的组件（Using Components with Known Vulnerablilities）"></a>0x9使用有公开漏洞的组件（Using Components with Known Vulnerablilities）</h3><p>组件，例如函数库，框架和其他的软件模块，他们都和web应用有一样的权限。如果使用了一个vulnerable的组件，对他的攻击会帮助攻击者，造成严重的数据丢失或者攻击者接管服务器。使用有已知安全漏洞的组件会破坏已有的安全防线，导致各种攻击。</p>
-<h3 id="0x10-无效的日志或监视（Insufficient-Logging-amp-Monitoring）"><a href="#0x10-无效的日志或监视（Insufficient-Logging-amp-Monitoring）" class="headerlink" title="0x10 无效的日志或监视（Insufficient Logging &amp; Monitoring）"></a>0x10 无效的日志或监视（Insufficient Logging &amp; Monitoring）</h3><p>无效的日志或者监视，加上没有应急响应（或者是低效的），使攻击者能够持续攻击系统，维持权限，然后转向更多的系统。攻击者能够篡改，收集，毁坏victim的数据。大多数的研究表明检测到数据泄露（data breach）的时间超过200天。</p>
+              <h2 id="awk使用"><a href="#awk使用" class="headerlink" title="awk使用"></a>awk使用</h2><h3 id="0x1-格式"><a href="#0x1-格式" class="headerlink" title="0x1 格式"></a>0x1 格式</h3><p>awk 选项 ‘BEGIN{action} pattern1 &amp;&amp; pattern2 || pattern3{action1}pattern4{action2;action3}END{action}’ 文件</p>
+<h3 id="0x2-执行流程"><a href="#0x2-执行流程" class="headerlink" title="0x2 执行流程"></a>0x2 执行流程</h3><p>awk首先执行BEGIN代码块</p>
+<p>然后按照RS指定的分隔符从文件中读取文件，RS默认为\n,如果没有指定文件，则从标准输入读取</p>
+<p>每读取一条记录</p>
+<p>都将设置NR,FNR,RT,$0等变量</p>
+<p>（默认）按照FS指定的分隔符分割字段，赋值给$1,$2,$3……$(NF-1),$NF,NF表示字段的个数</p>
+<p>对main代码块的pattern进行匹配，匹配则执行action</p>
+<p>执行END代码块</p>
+<h3 id="0x3分割字段的方法"><a href="#0x3分割字段的方法" class="headerlink" title="0x3分割字段的方法"></a>0x3分割字段的方法</h3><p>在BEGIN中指定对每条记录都有效，</p>
+<p><img src="image-20200921150511908.png" srcset="/img/loading.gif" alt="image-20200921150511908"></p>
+<p>在main代码块则只对第二条及以后有效。在对第n行的action中指定，只对对接下来的行有效。</p>
+<p><img src="image-20200921150745821.png" srcset="/img/loading.gif" alt="image-20200921150745821"></p>
+<p>可以通过PARTITION[FS]查看</p>
+<p><img src="image-20200921152241706.png" srcset="/img/loading.gif" alt="image-20200921152241706"></p>
+<h4 id="FS（默认）"><a href="#FS（默认）" class="headerlink" title="FS（默认）"></a>FS（默认）</h4><p>指定分隔符，默认为空格，默认情况下识别连续空格和其他空白符whitespace</p>
+<p><img src="image-20200921151241855.png" srcset="/img/loading.gif" alt="image-20200921151241855"></p>
+<p><img src="image-20200921150949617.png" srcset="/img/loading.gif" alt="image-20200921150949617"></p>
+<p>FIELDWIDTHS</p>
+<p>按字符格式分割字段 1 1:1代表第一个字段长度为1,跳过一个字符读取一个字符作为第二个字段，剩下的丢弃，字符读完为止</p>
+<p><img src="image-20200921151549478.png" srcset="/img/loading.gif" alt="image-20200921151549478"></p>
+<p><img src="image-20200921151629782.png" srcset="/img/loading.gif" alt="image-20200921151629782"></p>
+<h4 id="FPAT"><a href="#FPAT" class="headerlink" title="FPAT"></a>FPAT</h4><p>按照正则表达式匹配字段</p>
+<p><img src="image-20200921151823401.png" srcset="/img/loading.gif" alt="image-20200921151823401"></p>
+<h3 id="0x4-一些自带属性"><a href="#0x4-一些自带属性" class="headerlink" title="0x4 一些自带属性"></a>0x4 一些自带属性</h3><p>RS 记录分割     RT    输出时用RT记录进行连接</p>
+<p>FS 字段分割    FT    输出时用FT字段进行连接，<code>，代表FT</code></p>
+<p>FNR   单个输入的行号   NR  所有输入的行号</p>
+<p>NF   字段数</p>
+<p><img src="image-20200921152859320.png" srcset="/img/loading.gif" alt="image-20200921152932083"></p>
+<p>0x5 特殊的空值</p>
+<p>awk代码块中未被赋值的参数，会根据它进行的操作是算数运算还是其他运算进行初始化。</p>
+<p><img src="image-20200921153856329.png" srcset="/img/loading.gif" alt="image-20200921153856329"></p>
+<p>在处理第一行时，由于a为初始化，a可以为空字符串，0，false,由于前面进行了取反的布尔运算，所以a取false</p>
+<p>取反后为True赋值给a,所以第一行pattern为真。</p>
 
             </div>
             <hr>
@@ -243,7 +263,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/web/">web</a>
+                      <a class="hover-with-bg" href="/tags/shell/">shell</a>
                     
                   </div>
                 
@@ -256,18 +276,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/22/awk-%E7%94%A8%E6%B3%95/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">awk 用法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/19/tcp-ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">
-                        <span class="hidden-mobile">tcp/ip网络模型</span>
+                      <a href="/2020/08/21/owasp-top-10/">
+                        <span class="hidden-mobile">owasp top 10</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -410,7 +424,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "owasp top 10&nbsp;",
+        "awk 用法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
