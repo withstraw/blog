@@ -260,7 +260,7 @@ $s=serialize($f);
 <p><code>private 类型:键长度:%00类名%00键名;</code></p>
 <h3 id="0x5-与反序列化有关的魔术方法-wakeup-sleep"><a href="#0x5-与反序列化有关的魔术方法-wakeup-sleep" class="headerlink" title="0x5 与反序列化有关的魔术方法 __wakeup,__sleep"></a>0x5 与反序列化有关的魔术方法 <code>__wakeup,__sleep</code></h3><p><code>__sleep</code>在对象被序列化时调用，返回包含对象中所有应被序列化的变量名称的数组（按照规定）</p>
 <p><code>__wakeup</code>在对象被反序列化时调用，通常进行初始化操作，如果序列化字符串的个数出错，则不会调用。可以用于绕过<code>__wakeup</code>函数中的检查。</p>
-<h3 id="0x6-一些可以利用的魔术方法-toString-invoke-callable-get-set"><a href="#0x6-一些可以利用的魔术方法-toString-invoke-callable-get-set" class="headerlink" title="0x6 一些可以利用的魔术方法 __toString,__invoke,__callable,__get,__set"></a>0x6 一些可以利用的魔术方法 <code>__toString,__invoke,__callable,__get,__set</code></h3><h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="__toString"></a>__toString</h4><p>当一个类被当作字符串时，会调用该方法。此方法必须返回一个字符串。</p>
+<h3 id="0x6-一些可以利用的魔术方法-toString-invoke-callable-get-set-call"><a href="#0x6-一些可以利用的魔术方法-toString-invoke-callable-get-set-call" class="headerlink" title="0x6 一些可以利用的魔术方法 __toString,__invoke,__callable,__get,__set,__call"></a>0x6 一些可以利用的魔术方法 <code>__toString,__invoke,__callable,__get,__set,__call</code></h3><h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="__toString"></a>__toString</h4><p>当一个类被当作字符串时，会调用该方法。此方法必须返回一个字符串。</p>
 <pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">foo</span></span>&#123;
 	<span class="hljs-keyword">public</span> $bar1=<span class="hljs-number">1</span>;
