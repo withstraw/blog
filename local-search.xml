@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Python Requests库简单使用</title>
+    <link href="/2020/09/21/Python-Requests%E5%BA%93%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/09/21/Python-Requests%E5%BA%93%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Python-Requests库简单使用"><a href="#Python-Requests库简单使用" class="headerlink" title="Python Requests库简单使用"></a>Python Requests库简单使用</h2><h3 id="0x1-requests-get"><a href="#0x1-requests-get" class="headerlink" title="0x1 requests.get"></a>0x1 requests.get</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requestsurl=<span class="hljs-string">&#x27;http://www.exmaple.com&#x27;</span>headers=&#123;    <span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>&#125;r=requests.get(url)<span class="hljs-comment">#自定义请求头</span>r=requests.get(url,headers=headers)r.status_code  <span class="hljs-comment">#状态吗</span>r.content   <span class="hljs-comment">#二进制字节码</span>r.text       <span class="hljs-comment">#文本格式响应</span></code></pre><h3 id="0x2-requests-post"><a href="#0x2-requests-post" class="headerlink" title="0x2 requests.post"></a>0x2 requests.post</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requestsdata=&#123;<span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>&#125;cookies=&#123;<span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>&#125;files=&#123;<span class="hljs-string">&quot;foo1&quot;</span>:<span class="hljs-string">&quot;filelikeobject&quot;</span><span class="hljs-string">&quot;foo2&quot;</span>:(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;content&quot;</span>,<span class="hljs-string">&quot;/imge/png&quot;</span>)&#125;url=<span class="hljs-string">&quot;http://httpbin.org/post&quot;</span><span class="hljs-comment">#上传数据</span>r=requests.post(url,data=<span class="hljs-string">&quot;l am in body&quot;</span>)<span class="hljs-comment">#上传表单数据</span>r=requests.post(url,data=data)<span class="hljs-comment">#上传文件</span>r=requests.post(url,files=files)<span class="hljs-comment">#带有cookies</span>r=requests.post(url,cookies=cookies)r.text</code></pre><h3 id="0x3-session"><a href="#0x3-session" class="headerlink" title="0x3 session"></a>0x3 session</h3><pre><code class="hljs routeros">import requests<span class="hljs-attribute">url</span>=<span class="hljs-string">&quot;http://httpbin.org&quot;</span><span class="hljs-attribute">s</span>=requests.session()s.<span class="hljs-builtin-name">get</span>(url)s.post(url)</code></pre><pre><code class="hljs qml"><span class="hljs-keyword">import</span> requests<span class="hljs-built_in">url</span>=<span class="hljs-string">&quot;http://httpbin.org&quot;</span><span class="hljs-keyword">with</span> requests.Session() <span class="hljs-keyword">as</span> <span class="hljs-attribute">s</span>:s.get(<span class="hljs-built_in">url</span>)s.post(<span class="hljs-built_in">url</span>)</code></pre><p>0x4 proxy</p><pre><code class="hljs makefile">import requestsurl=<span class="hljs-string">&quot;http://httpbin.org&quot;</span>proxies=&#123;<span class="hljs-string">&quot;http&quot;</span>:<span class="hljs-string">&quot;127.0.0.1:7777&quot;</span>,<span class="hljs-string">&quot;https&quot;</span>:<span class="hljs-string">&quot;127.0.0.1:777&quot;</span>&#125;r=requests.get(url,proxies=proxies)</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>awk 用法</title>
     <link href="/2020/08/22/awk-%E7%94%A8%E6%B3%95/"/>
     <url>/2020/08/22/awk-%E7%94%A8%E6%B3%95/</url>

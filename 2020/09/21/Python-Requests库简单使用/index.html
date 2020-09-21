@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="foon">
   <meta name="keywords" content="">
-  <title>awk 用法 - 小破站</title>
+  <title>Python Requests库简单使用 - 小破站</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-22 15:40" pubdate>
-        2020年8月22日 下午
+      <time datetime="2020-09-21 16:38" pubdate>
+        2020年9月21日 下午
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      472 字
+      238 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      4
        分钟
     </span>
   
@@ -217,42 +217,68 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">awk 用法</h1>
+            <h1 style="display: none">Python Requests库简单使用</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="awk使用"><a href="#awk使用" class="headerlink" title="awk使用"></a>awk使用</h2><h3 id="0x1-格式"><a href="#0x1-格式" class="headerlink" title="0x1 格式"></a>0x1 格式</h3><p>awk 选项 ‘BEGIN{action} pattern1 &amp;&amp; pattern2 || pattern3{action1}pattern4{action2;action3}END{action}’ 文件</p>
-<h3 id="0x2-执行流程"><a href="#0x2-执行流程" class="headerlink" title="0x2 执行流程"></a>0x2 执行流程</h3><p>awk首先执行BEGIN代码块</p>
-<p>然后按照RS指定的分隔符从文件中读取文件，RS默认为\n,如果没有指定文件，则从标准输入读取</p>
-<p>每读取一条记录</p>
-<p>都将设置NR,FNR,RT,$0等变量</p>
-<p>（默认）按照FS指定的分隔符分割字段，赋值给$1,$2,$3……$(NF-1),$NF,NF表示字段的个数</p>
-<p>对main代码块的pattern进行匹配，匹配则执行action</p>
-<p>执行END代码块</p>
-<h3 id="0x3分割字段的方法"><a href="#0x3分割字段的方法" class="headerlink" title="0x3分割字段的方法"></a>0x3分割字段的方法</h3><p>在BEGIN中指定对每条记录都有效，</p>
-<p><img src="image-20200921150511908.png" srcset="/img/loading.gif" alt="image-20200921150511908"></p>
-<p>在main代码块则只对第二条及以后有效。在对第n行的action中指定，只对对接下来的行有效。</p>
-<p><img src="image-20200921150745821.png" srcset="/img/loading.gif" alt="image-20200921150745821"></p>
-<p>可以通过PROCINFO[“FS”]查看</p>
-<p><img src="image-20200921152241706.png" srcset="/img/loading.gif" alt="image-20200921152241706"></p>
-<h4 id="FS（默认）"><a href="#FS（默认）" class="headerlink" title="FS（默认）"></a>FS（默认）</h4><p>指定分隔符，默认为空格，默认情况下识别连续空格和其他空白符whitespace</p>
-<p><img src="image-20200921151241855.png" srcset="/img/loading.gif" alt="image-20200921151241855"></p>
-<p><img src="image-20200921150949617.png" srcset="/img/loading.gif" alt="image-20200921150949617"></p>
-<p>FIELDWIDTHS</p>
-<p>按字符格式分割字段 1 1:1代表第一个字段长度为1,跳过一个字符读取一个字符作为第二个字段，剩下的丢弃，字符读完为止</p>
-<p><img src="image-20200921151549478.png" srcset="/img/loading.gif" alt="image-20200921151549478"></p>
-<p><img src="image-20200921151629782.png" srcset="/img/loading.gif" alt="image-20200921151629782"></p>
-<h4 id="FPAT"><a href="#FPAT" class="headerlink" title="FPAT"></a>FPAT</h4><p>按照正则表达式匹配字段</p>
-<p><img src="image-20200921151823401.png" srcset="/img/loading.gif" alt="image-20200921151823401"></p>
-<h3 id="0x4-一些自带属性"><a href="#0x4-一些自带属性" class="headerlink" title="0x4 一些自带属性"></a>0x4 一些自带属性</h3><p>RS 记录分割     RT    输出时用RT记录进行连接</p>
-<p>FS 字段分割    FT    输出时用FT字段进行连接，<code>，代表FT</code></p>
-<p>FNR   单个输入的行号   NR  所有输入的行号</p>
-<p>NF   字段数</p>
-<p><img src="image-20200921152859320.png" srcset="/img/loading.gif" alt="image-20200921152932083"></p>
-<p>0x5 特殊的空值</p>
-<p>awk代码块中未被赋值的参数，会根据它进行的操作是算数运算还是其他运算进行初始化。</p>
-<p><img src="image-20200921153856329.png" srcset="/img/loading.gif" alt="image-20200921153856329"></p>
-<p>在处理第一行时，由于a为初始化，a可以为空字符串，0，false,由于前面进行了取反的布尔运算，所以a取false</p>
-<p>取反后为True赋值给a,所以第一行pattern为真。</p>
+              <h2 id="Python-Requests库简单使用"><a href="#Python-Requests库简单使用" class="headerlink" title="Python Requests库简单使用"></a>Python Requests库简单使用</h2><h3 id="0x1-requests-get"><a href="#0x1-requests-get" class="headerlink" title="0x1 requests.get"></a>0x1 requests.get</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
+url=<span class="hljs-string">&#x27;http://www.exmaple.com&#x27;</span>
+headers=&#123;
+    <span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>
+&#125;
+r=requests.get(url)
+<span class="hljs-comment">#自定义请求头</span>
+r=requests.get(url,headers=headers)
+r.status_code  <span class="hljs-comment">#状态吗</span>
+
+r.content   <span class="hljs-comment">#二进制字节码</span>
+
+r.text       <span class="hljs-comment">#文本格式响应</span></code></pre>
+
+<h3 id="0x2-requests-post"><a href="#0x2-requests-post" class="headerlink" title="0x2 requests.post"></a>0x2 requests.post</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
+data=&#123;
+<span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>
+&#125;
+cookies=&#123;
+<span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>
+&#125;
+files=&#123;
+<span class="hljs-string">&quot;foo1&quot;</span>:<span class="hljs-string">&quot;filelikeobject&quot;</span>
+<span class="hljs-string">&quot;foo2&quot;</span>:(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;content&quot;</span>,<span class="hljs-string">&quot;/imge/png&quot;</span>)
+&#125;
+url=<span class="hljs-string">&quot;http://httpbin.org/post&quot;</span>
+<span class="hljs-comment">#上传数据</span>
+r=requests.post(url,data=<span class="hljs-string">&quot;l am in body&quot;</span>)
+<span class="hljs-comment">#上传表单数据</span>
+r=requests.post(url,data=data)
+<span class="hljs-comment">#上传文件</span>
+r=requests.post(url,files=files)
+<span class="hljs-comment">#带有cookies</span>
+r=requests.post(url,cookies=cookies)
+r.text</code></pre>
+
+<h3 id="0x3-session"><a href="#0x3-session" class="headerlink" title="0x3 session"></a>0x3 session</h3><pre><code class="hljs routeros">import requests
+<span class="hljs-attribute">url</span>=<span class="hljs-string">&quot;http://httpbin.org&quot;</span>
+<span class="hljs-attribute">s</span>=requests.session()
+s.<span class="hljs-builtin-name">get</span>(url)
+s.post(url)</code></pre>
+
+<pre><code class="hljs qml"><span class="hljs-keyword">import</span> requests
+<span class="hljs-built_in">url</span>=<span class="hljs-string">&quot;http://httpbin.org&quot;</span>
+<span class="hljs-keyword">with</span> requests.Session() <span class="hljs-keyword">as</span> <span class="hljs-attribute">s</span>:
+	s.get(<span class="hljs-built_in">url</span>)
+	s.post(<span class="hljs-built_in">url</span>)
+</code></pre>
+
+<p>0x4 proxy</p>
+<pre><code class="hljs makefile">import requests
+url=<span class="hljs-string">&quot;http://httpbin.org&quot;</span>
+proxies=&#123;
+<span class="hljs-string">&quot;http&quot;</span>:<span class="hljs-string">&quot;127.0.0.1:7777&quot;</span>,
+<span class="hljs-string">&quot;https&quot;</span>:<span class="hljs-string">&quot;127.0.0.1:777&quot;</span>
+&#125;
+r=requests.get(url,proxies=proxies)</code></pre>
+
+
 
             </div>
             <hr>
@@ -263,7 +289,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/shell/">shell</a>
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
                     
                   </div>
                 
@@ -276,18 +302,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/21/Python-Requests%E5%BA%93%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python Requests库简单使用</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/21/owasp-top-10/">
-                        <span class="hidden-mobile">owasp top 10</span>
+                      <a href="/2020/08/22/awk-%E7%94%A8%E6%B3%95/">
+                        <span class="hidden-mobile">awk 用法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -430,7 +450,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "awk 用法&nbsp;",
+        "Python Requests库简单使用&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
