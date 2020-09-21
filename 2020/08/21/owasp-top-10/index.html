@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="foon">
   <meta name="keywords" content="">
-  <title>tcp/ip网络模型 - 小破站</title>
+  <title>owasp top 10 - 小破站</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-19 19:36" pubdate>
-        2020年8月19日 晚上
+      <time datetime="2020-08-21 14:40" pubdate>
+        2020年8月21日 下午
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      920 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      9
        分钟
     </span>
   
@@ -217,52 +217,23 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">tcp/ip网络模型</h1>
+            <h1 style="display: none">owasp top 10</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="tcp-ip-网络模型"><a href="#tcp-ip-网络模型" class="headerlink" title="tcp/ip 网络模型"></a>tcp/ip 网络模型</h2><p>分为五层，从上到下为应用层、传输层、网络层、数据链路层、物理层。</p>
-<h3 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h3><h4 id="http（超文本传输协议）"><a href="#http（超文本传输协议）" class="headerlink" title="http（超文本传输协议）"></a>http（超文本传输协议）</h4><p>可以通过<code>curl url -v</code>查看一次完整的http请求过程</p>
-<p><img src="image-20200919173124218.png" srcset="/img/loading.gif" alt="image-20200919173124218"> </p>
-<p>以上的流程可以总结为：</p>
-<p>1、和服务器的端口建立tcp链接（默认为80端口）</p>
-<p>2、发送http请求，包含请求头和请求体，请求头包含多个键值对<code>key1:value1</code>每行以<code>\r\n</code>分割，当遇到两个<code>\r\n</code>表示请求头的结束，接下来全是请求体</p>
-<p>3、服务器返回响应，包含响应头和响应体，格式与http请求基本相同</p>
-<p>4、和服务器断开tcp链接</p>
-<h4 id="dns（域名系统）"><a href="#dns（域名系统）" class="headerlink" title="dns（域名系统）"></a>dns（域名系统）</h4><p>由于32位二进制的ip地址十分难记，我们使用域名来方便记忆。但是计算机不认识域名，前辈们就开发了dns域名系统，实现域名和ip的转换。</p>
-<p>由于计算机无法理解dns系统之间的交流方式，所以通常通过一个resolver来和域名系统交流。我们将dns请求发给resolver,resolver来和dns交流，并返回给我们一个ip。查询域名为 <a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> 的ip，完整的交流过程为：</p>
-<p>1、计算机将dns请求发给resolver</p>
-<p>2、resolver询问根服务器，根服务器不知道，但是.com服务器知道。</p>
-<p>3、于是resolver询问com服务器，com服务器表示exmaple.com知道</p>
-<p>4、询问example.com,得到ip地址</p>
-<p>当然，由于缓存的存在，通常我们不需要走完全程，例如resolver缓存了dns查询记录，我们直接就可以拿到结果。再比如我们缓存了com服务器知道结果，则直接询问com服务器。</p>
-<h4 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h4><p>使用公私钥加密方式，提供安全的隧道。</p>
-<h3 id="传输层协议"><a href="#传输层协议" class="headerlink" title="传输层协议"></a>传输层协议</h3><h4 id="tcp"><a href="#tcp" class="headerlink" title="tcp"></a>tcp</h4><p>tcp报文记录了源端口和目的端口</p>
-<p>端口一共有65535个，前1024个为公认端口，他们紧密绑定了一些服务。只有root有权限控制。</p>
-<p>发送http请求时，源端口为系统任意选择大于1024的任意端口，目的端口默认为80</p>
-<p>握手过程分为三步</p>
-<p>1、客户端发送<code>SYN=x</code>，请求建立连接，客户端状态为syn-send</p>
-<p>2、服务器收到，发送<code>SYN=y,ACK=x+1</code>,服务器状态为syn-received</p>
-<p>3、客户端收到请求，发送<code>ACK=y+1</code>,连接建立</p>
-<p>对于tcp的实现socket来说</p>
-<p>服务端</p>
-<p>1、使用socket创建监听套接字listenfd，调用bind绑定端口，调用listen监听端口,监听之后，套接字从CLOSED状态变为LISTEN状态</p>
-<p>2、收到客户端发来的SYN报文，回复SYN+ACK,这时在未完成连接队列中创建一个新项目,并设置为SYN_RECV状态，然后继续监听listenfd</p>
-<p>3、再次收到对应的ACK报文,把连接未完成队列中的项目移入连接已完成队列，并设置为ESTABLISHED状态</p>
-<p>4、服务器通过accept进行消费，从已完成队列中拿取连接</p>
-<p>netstat命令的Recv-Q和Send-Q表示的就是socket buffer相关的内容</p>
-<p>对于监听状态的套接字，Recv-Q表示的是未完成队列中的连接个数，Send-Q表示的是未完成连接队列的最大连接限制个数</p>
-<p>对于已经建立的tcp连接，Recv-Q列表示的是recv buffer中还未被用户进程拷贝走的数据大小，</p>
-<p>Send-Q表示的是远程主机还未返回ACK消息的数据大小</p>
-<p><img src="image-20200919185139646.png" srcset="/img/loading.gif" alt="image-20200919185139646"> </p>
-<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><h4 id="ip"><a href="#ip" class="headerlink" title="ip"></a>ip</h4><p>ipv4地址由32位二进制表示，也可以每八位一组来表示。</p>
-<p>IP地址范围为0.0.0.0-255.255.255.255</p>
-<p>其中10.0.0.0～10.255.255.255、172.16.0.0～172.16.255.255、192.168.0.0～192.168.255.255为内网地址，在公网上不分配，127开头的为环回地址，代表本机。</p>
-<p>主机号全为0的表示直接广播地址，主机号全为1的表示受限广播地址，区别为广播是否会被发给路由器。</p>
-<h4 id="icmp"><a href="#icmp" class="headerlink" title="icmp"></a>icmp</h4><p>icmp报文包含在ip报文中，头部的type说明icmp报文的作用</p>
-<p>常见的type有</p>
-<p>0：echo reply ping 应答</p>
-<p>8：echo request ping请求</p>
-<h4 id="ipsec"><a href="#ipsec" class="headerlink" title="ipsec"></a>ipsec</h4>
+              <h2 id="owasp-top10漏洞"><a href="#owasp-top10漏洞" class="headerlink" title="owasp top10漏洞"></a>owasp top10漏洞</h2><h3 id="0x1-注入（Injection）"><a href="#0x1-注入（Injection）" class="headerlink" title="0x1 注入（Injection）"></a>0x1 注入（Injection）</h3><p>注入漏洞，例如SQL,NOSQL,OS和LDAP注入，当不可信的数据被当作命令或者查询的一部分解析时出现。攻击者的恶意数据能够让解释器执行意料之外的命令或者绕过授权读取数据。</p>
+<h3 id="0x2-错误的身份验证-Broken-Authentication"><a href="#0x2-错误的身份验证-Broken-Authentication" class="headerlink" title="0x2 错误的身份验证(Broken Authentication)"></a>0x2 错误的身份验证(Broken Authentication)</h3><p>应用的有关身份验证和session管理的实现往往是错误的，这使得攻击者能拿到密码，keys,session tokens，或者让攻击者挖掘其他的漏洞，暂时或永久的冒充其他用户。</p>
+<h3 id="0x3-敏感信息泄露（Sensitive-Data-Exposure）"><a href="#0x3-敏感信息泄露（Sensitive-Data-Exposure）" class="headerlink" title="0x3 敏感信息泄露（Sensitive Data Exposure）"></a>0x3 敏感信息泄露（Sensitive Data Exposure）</h3><p>许多web应用和api没有正确的保护敏感数据，攻击者可能窃取或者修改这些未被保护好的数据，进行信用卡诈骗，身份窃取，或者其他的犯罪行为。敏感数据如果没有进行保护，例如静态、动态加密，在浏览器间传输时实行特别的预防措施，就很可能会泄露。</p>
+<h3 id="0x4-XXE（XML-External-Entities）"><a href="#0x4-XXE（XML-External-Entities）" class="headerlink" title="0x4 XXE（XML External Entities）"></a>0x4 XXE（XML External Entities）</h3><p>许多旧的、配置错误的XML处理器在xml文档里进行外部实体引用。外部实体能够被用来读取服务器内部的文件，通过file协议，还可以进行服务器端口扫描、远程代码执行、拒绝服务攻击。</p>
+<h3 id="0x5-错误的访问控制（Broken-Access-Control）"><a href="#0x5-错误的访问控制（Broken-Access-Control）" class="headerlink" title="0x5 错误的访问控制（Broken Access Control）"></a>0x5 错误的访问控制（Broken Access Control）</h3><p>被授权用户的行为往往没有被正确的限制。攻击者可以利用这些漏洞访问未授权的功能，或者读取不属于他的数据，例如访问其他用户的帐号，访问敏感文件，修改其他用户的数据，更改访问权限等</p>
+<h3 id="0x6-错误的安全配置（Security-Misconfiguration）"><a href="#0x6-错误的安全配置（Security-Misconfiguration）" class="headerlink" title="0x6 错误的安全配置（Security Misconfiguration）"></a>0x6 错误的安全配置（Security Misconfiguration）</h3><p>错误的安全配置是最常见的问题。往往是由于使用了默认的不安全的配置。厂商不仅需要根据不同操作系统、框架、库和应用来进行安全配置，而且这些配置要按时更新，打补丁。</p>
+<h3 id="0x7跨站脚本攻击（Cross-Site-Scripting-Xss）"><a href="#0x7跨站脚本攻击（Cross-Site-Scripting-Xss）" class="headerlink" title="0x7跨站脚本攻击（Cross-Site Scripting Xss）"></a>0x7跨站脚本攻击（Cross-Site Scripting Xss）</h3><p>XSS漏洞的存在</p>
+<p>1、在新的web页面包含不可信的数据，没有进行正确的验证和转义</p>
+<p>2、通过可以创建HTML或者JS的浏览器API，用用户提交的数据更新web页面</p>
+<p>XSS让攻击者能够在victim的浏览器上执行代码，XSS能够劫持用户的session,污染网站，或者将用户重定向到恶意网站（可以和CSRF漏洞配合）</p>
+<h3 id="0x8不安全的反序列化（Insecure-Deserialization）"><a href="#0x8不安全的反序列化（Insecure-Deserialization）" class="headerlink" title="0x8不安全的反序列化（Insecure Deserialization）"></a>0x8不安全的反序列化（Insecure Deserialization）</h3><p>不安全的反序列化往往导致了远程代码执行。即使反序列化漏洞没有导致远程代码执行，也能够被用来辅助攻击，包括重放攻击，注入攻击，越权攻击</p>
+<h3 id="0x9使用有公开漏洞的组件（Using-Components-with-Known-Vulnerablilities）"><a href="#0x9使用有公开漏洞的组件（Using-Components-with-Known-Vulnerablilities）" class="headerlink" title="0x9使用有公开漏洞的组件（Using Components with Known Vulnerablilities）"></a>0x9使用有公开漏洞的组件（Using Components with Known Vulnerablilities）</h3><p>组件，例如函数库，框架和其他的软件模块，他们都和web应用有一样的权限。如果使用了一个vulnerable的组件，对他的攻击会帮助攻击者，造成严重的数据丢失或者攻击者接管服务器。使用有已知安全漏洞的组件会破坏已有的安全防线，导致各种攻击。</p>
+<h3 id="0x10-无效的日志或监视（Insufficient-Logging-amp-Monitoring）"><a href="#0x10-无效的日志或监视（Insufficient-Logging-amp-Monitoring）" class="headerlink" title="0x10 无效的日志或监视（Insufficient Logging &amp; Monitoring）"></a>0x10 无效的日志或监视（Insufficient Logging &amp; Monitoring）</h3><p>无效的日志或者监视，加上没有应急响应（或者是低效的），使攻击者能够持续攻击系统，维持权限，然后转向更多的系统。攻击者能够篡改，收集，毁坏victim的数据。大多数的研究表明检测到数据泄露（data breach）的时间超过200天。</p>
+
             </div>
             <hr>
             <div>
@@ -285,15 +256,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/21/owasp-top-10/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">owasp top 10</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2020/08/19/tcp-ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">
+                        <span class="hidden-mobile">tcp/ip网络模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
@@ -433,7 +404,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "tcp/ip网络模型&nbsp;",
+        "owasp top 10&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>owasp top 10</title>
+    <link href="/2020/08/21/owasp-top-10/"/>
+    <url>/2020/08/21/owasp-top-10/</url>
+    
+    <content type="html"><![CDATA[<h2 id="owasp-top10漏洞"><a href="#owasp-top10漏洞" class="headerlink" title="owasp top10漏洞"></a>owasp top10漏洞</h2><h3 id="0x1-注入（Injection）"><a href="#0x1-注入（Injection）" class="headerlink" title="0x1 注入（Injection）"></a>0x1 注入（Injection）</h3><p>注入漏洞，例如SQL,NOSQL,OS和LDAP注入，当不可信的数据被当作命令或者查询的一部分解析时出现。攻击者的恶意数据能够让解释器执行意料之外的命令或者绕过授权读取数据。</p><h3 id="0x2-错误的身份验证-Broken-Authentication"><a href="#0x2-错误的身份验证-Broken-Authentication" class="headerlink" title="0x2 错误的身份验证(Broken Authentication)"></a>0x2 错误的身份验证(Broken Authentication)</h3><p>应用的有关身份验证和session管理的实现往往是错误的，这使得攻击者能拿到密码，keys,session tokens，或者让攻击者挖掘其他的漏洞，暂时或永久的冒充其他用户。</p><h3 id="0x3-敏感信息泄露（Sensitive-Data-Exposure）"><a href="#0x3-敏感信息泄露（Sensitive-Data-Exposure）" class="headerlink" title="0x3 敏感信息泄露（Sensitive Data Exposure）"></a>0x3 敏感信息泄露（Sensitive Data Exposure）</h3><p>许多web应用和api没有正确的保护敏感数据，攻击者可能窃取或者修改这些未被保护好的数据，进行信用卡诈骗，身份窃取，或者其他的犯罪行为。敏感数据如果没有进行保护，例如静态、动态加密，在浏览器间传输时实行特别的预防措施，就很可能会泄露。</p><h3 id="0x4-XXE（XML-External-Entities）"><a href="#0x4-XXE（XML-External-Entities）" class="headerlink" title="0x4 XXE（XML External Entities）"></a>0x4 XXE（XML External Entities）</h3><p>许多旧的、配置错误的XML处理器在xml文档里进行外部实体引用。外部实体能够被用来读取服务器内部的文件，通过file协议，还可以进行服务器端口扫描、远程代码执行、拒绝服务攻击。</p><h3 id="0x5-错误的访问控制（Broken-Access-Control）"><a href="#0x5-错误的访问控制（Broken-Access-Control）" class="headerlink" title="0x5 错误的访问控制（Broken Access Control）"></a>0x5 错误的访问控制（Broken Access Control）</h3><p>被授权用户的行为往往没有被正确的限制。攻击者可以利用这些漏洞访问未授权的功能，或者读取不属于他的数据，例如访问其他用户的帐号，访问敏感文件，修改其他用户的数据，更改访问权限等</p><h3 id="0x6-错误的安全配置（Security-Misconfiguration）"><a href="#0x6-错误的安全配置（Security-Misconfiguration）" class="headerlink" title="0x6 错误的安全配置（Security Misconfiguration）"></a>0x6 错误的安全配置（Security Misconfiguration）</h3><p>错误的安全配置是最常见的问题。往往是由于使用了默认的不安全的配置。厂商不仅需要根据不同操作系统、框架、库和应用来进行安全配置，而且这些配置要按时更新，打补丁。</p><h3 id="0x7跨站脚本攻击（Cross-Site-Scripting-Xss）"><a href="#0x7跨站脚本攻击（Cross-Site-Scripting-Xss）" class="headerlink" title="0x7跨站脚本攻击（Cross-Site Scripting Xss）"></a>0x7跨站脚本攻击（Cross-Site Scripting Xss）</h3><p>XSS漏洞的存在</p><p>1、在新的web页面包含不可信的数据，没有进行正确的验证和转义</p><p>2、通过可以创建HTML或者JS的浏览器API，用用户提交的数据更新web页面</p><p>XSS让攻击者能够在victim的浏览器上执行代码，XSS能够劫持用户的session,污染网站，或者将用户重定向到恶意网站（可以和CSRF漏洞配合）</p><h3 id="0x8不安全的反序列化（Insecure-Deserialization）"><a href="#0x8不安全的反序列化（Insecure-Deserialization）" class="headerlink" title="0x8不安全的反序列化（Insecure Deserialization）"></a>0x8不安全的反序列化（Insecure Deserialization）</h3><p>不安全的反序列化往往导致了远程代码执行。即使反序列化漏洞没有导致远程代码执行，也能够被用来辅助攻击，包括重放攻击，注入攻击，越权攻击</p><h3 id="0x9使用有公开漏洞的组件（Using-Components-with-Known-Vulnerablilities）"><a href="#0x9使用有公开漏洞的组件（Using-Components-with-Known-Vulnerablilities）" class="headerlink" title="0x9使用有公开漏洞的组件（Using Components with Known Vulnerablilities）"></a>0x9使用有公开漏洞的组件（Using Components with Known Vulnerablilities）</h3><p>组件，例如函数库，框架和其他的软件模块，他们都和web应用有一样的权限。如果使用了一个vulnerable的组件，对他的攻击会帮助攻击者，造成严重的数据丢失或者攻击者接管服务器。使用有已知安全漏洞的组件会破坏已有的安全防线，导致各种攻击。</p><h3 id="0x10-无效的日志或监视（Insufficient-Logging-amp-Monitoring）"><a href="#0x10-无效的日志或监视（Insufficient-Logging-amp-Monitoring）" class="headerlink" title="0x10 无效的日志或监视（Insufficient Logging &amp; Monitoring）"></a>0x10 无效的日志或监视（Insufficient Logging &amp; Monitoring）</h3><p>无效的日志或者监视，加上没有应急响应（或者是低效的），使攻击者能够持续攻击系统，维持权限，然后转向更多的系统。攻击者能够篡改，收集，毁坏victim的数据。大多数的研究表明检测到数据泄露（data breach）的时间超过200天。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>web</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>tcp/ip网络模型</title>
     <link href="/2020/08/19/tcp-ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/"/>
     <url>/2020/08/19/tcp-ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/</url>
