@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="foon">
   <meta name="keywords" content="">
-  <title>awk 用法 - 小破站</title>
+  <title>Python Pickle反序列化 - 小破站</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-22 15:40" pubdate>
+      <time datetime="2020-08-22 16:22" pubdate>
         2020年8月22日 下午
       </time>
     </span>
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      472 字
+      771 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      10
        分钟
     </span>
   
@@ -217,42 +217,73 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">awk 用法</h1>
+            <h1 style="display: none">Python Pickle反序列化</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="awk使用"><a href="#awk使用" class="headerlink" title="awk使用"></a>awk使用</h2><h3 id="0x1-格式"><a href="#0x1-格式" class="headerlink" title="0x1 格式"></a>0x1 格式</h3><p>awk 选项 ‘BEGIN{action} pattern1 &amp;&amp; pattern2 || pattern3{action1}pattern4{action2;action3}END{action}’ 文件</p>
-<h3 id="0x2-执行流程"><a href="#0x2-执行流程" class="headerlink" title="0x2 执行流程"></a>0x2 执行流程</h3><p>awk首先执行BEGIN代码块</p>
-<p>然后按照RS指定的分隔符从文件中读取文件，RS默认为\n,如果没有指定文件，则从标准输入读取</p>
-<p>每读取一条记录</p>
-<p>都将设置NR,FNR,RT,$0等变量</p>
-<p>（默认）按照FS指定的分隔符分割字段，赋值给$1,$2,$3……$(NF-1),$NF,NF表示字段的个数</p>
-<p>对main代码块的pattern进行匹配，匹配则执行action</p>
-<p>执行END代码块</p>
-<h3 id="0x3分割字段的方法"><a href="#0x3分割字段的方法" class="headerlink" title="0x3分割字段的方法"></a>0x3分割字段的方法</h3><p>在BEGIN中指定对每条记录都有效，</p>
-<p><img src="image-20200921150511908.png" srcset="/img/loading.gif" alt="image-20200921150511908"></p>
-<p>在main代码块则只对第二条及以后有效。在对第n行的action中指定，只对对接下来的行有效。</p>
-<p><img src="image-20200921150745821.png" srcset="/img/loading.gif" alt="image-20200921150745821"></p>
-<p>可以通过PROCINFO[“FS”]查看</p>
-<p><img src="image-20200921152241706.png" srcset="/img/loading.gif" alt="image-20200921152241706"></p>
-<h4 id="FS（默认）"><a href="#FS（默认）" class="headerlink" title="FS（默认）"></a>FS（默认）</h4><p>指定分隔符，默认为空格，默认情况下识别连续空格和其他空白符whitespace</p>
-<p><img src="image-20200921151241855.png" srcset="/img/loading.gif" alt="image-20200921151241855"></p>
-<p><img src="image-20200921150949617.png" srcset="/img/loading.gif" alt="image-20200921150949617"></p>
-<p>FIELDWIDTHS</p>
-<p>按字符格式分割字段 1 1:1代表第一个字段长度为1,跳过一个字符读取一个字符作为第二个字段，剩下的丢弃，字符读完为止</p>
-<p><img src="image-20200921151549478.png" srcset="/img/loading.gif" alt="image-20200921151549478"></p>
-<p><img src="image-20200921151629782.png" srcset="/img/loading.gif" alt="image-20200921151629782"></p>
-<h4 id="FPAT"><a href="#FPAT" class="headerlink" title="FPAT"></a>FPAT</h4><p>按照正则表达式匹配字段</p>
-<p><img src="image-20200921151823401.png" srcset="/img/loading.gif" alt="image-20200921151823401"></p>
-<h3 id="0x4-一些自带属性"><a href="#0x4-一些自带属性" class="headerlink" title="0x4 一些自带属性"></a>0x4 一些自带属性</h3><p>RS 记录分割     RT    输出时用RT记录进行连接</p>
-<p>FS 字段分割    FT    输出时用FT字段进行连接，<code>，代表FT</code></p>
-<p>FNR   单个输入的行号   NR  所有输入的行号</p>
-<p>NF   字段数</p>
-<p><img src="image-20200921152859320.png" srcset="/img/loading.gif" alt="image-20200921152932083"></p>
-<p>0x5 特殊的空值</p>
-<p>awk代码块中未被赋值的参数，会根据它进行的操作是算数运算还是其他运算进行初始化。</p>
-<p><img src="image-20200921153856329.png" srcset="/img/loading.gif" alt="image-20200921153856329"></p>
-<p>在处理第一行时，由于a为初始化，a可以为空字符串，0，false,由于前面进行了取反的布尔运算，所以a取false</p>
-<p>取反后为True赋值给a,所以第一行pattern为真。</p>
+              <h2 id="Python-Pickle反序列化"><a href="#Python-Pickle反序列化" class="headerlink" title="Python Pickle反序列化"></a>Python Pickle反序列化</h2><h3 id="0x01-Pickle介绍"><a href="#0x01-Pickle介绍" class="headerlink" title="0x01 Pickle介绍"></a>0x01 Pickle介绍</h3><p>Pickle模块是可以用来序列化和反序列化，可以被操作的对象有</p>
+<pre><code class="hljs txt">None、True、False
+整数、浮点数、复数
+str、byte、bytearray
+只包含可操作对象的tuple、list、set、dict
+定义在模块最外层的函数（不包含lambda）
+定义在模块最外层的内置函数
+定义在模块最外层的类
+__dict__属性或__getstate__()函数的返回值能够被封存的类</code></pre>
+
+<p><code>pickle.load</code>从文件读取序列化后的对象，<code>pickle.dump</code>序列化对象到文件</p>
+<p><code>pickle.loads</code>从byte-like object读取序列化后的对象，<code>pickle.dumps</code>将序列化后的对象以bytes类型返回</p>
+<h3 id="0x02-Pickle-原理"><a href="#0x02-Pickle-原理" class="headerlink" title="0x02 Pickle 原理"></a>0x02 Pickle 原理</h3><h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><p>pickle在序列化时只序列化类的名称<code>__class__</code>,和对象属性列表<code>__dict__</code></p>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">save</span>(<span class="hljs-params">obj</span>):</span>
+    <span class="hljs-keyword">return</span> (obj.__class__, obj.__dict__)</code></pre>
+
+<p>也就是说类属性不会被序列化</p>
+<h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><p>pickle反序列化时并不会调用类的<code>__init__</code>方法,而是使用<code>__new__</code>方法创建实例,然后修改实例的<code>__dict__</code>属性</p>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load</span>(<span class="hljs-params">cls, attributes</span>):</span>
+    obj = cls.__new__(cls)
+    obj.__dict__.update(attributes)
+    <span class="hljs-keyword">return</span> obj</code></pre>
+
+<p>从底层来讲</p>
+<p>Pickle模块维护了两个栈:当前栈,和前序栈,还有一个存储区,这里不看.序列化得到的字节其实类似于由操作码和操作数的字节码.复原一个类的实际操作和上面的load()函数基本相同.我们可以使用pickletools来查看</p>
+<pre><code class="hljs txt">pickletools是python自带的pickle调试器，有三个功能：反汇编一个已经被打包的字符串、优化一个已经被打包的字符串、返回一个迭代器来供程序使用。我们一般使用前两种。</code></pre>
+
+
+
+<pre><code class="hljs python"><span class="hljs-keyword">import</span> pickle
+<span class="hljs-keyword">import</span> pickletools
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span>
+        self.q=<span class="hljs-string">&#x27;w&#x27;</span>
+        self.p=<span class="hljs-string">&#x27;z&#x27;</span>
+
+s=pickle.dumps(A())
+s=pickletools.optimize(s)
+print(s)
+pickletools.dis(s)</code></pre>
+
+<pre><code class="hljs python">返回结果
+<span class="hljs-string">b&#x27;\x80\x04\x95!\x00\x00\x00\x00\x00\x00\x00\x8c\x08__main__\x8c\x01A\x93)\x81&#125;(\x8c\x01q\x8c\x01w\x8c\x01p\x8c\x01zub.&#x27;</span>
+    <span class="hljs-number">0</span>: \x80 PROTO      <span class="hljs-number">4</span>				当前协议版本<span class="hljs-number">4</span>
+    <span class="hljs-number">2</span>: \x95 FRAME      <span class="hljs-number">33</span>				接下来为新的栈帧
+   <span class="hljs-number">11</span>: \x8c SHORT_BINUNICODE <span class="hljs-string">&#x27;__main__&#x27;</span>	  压栈__main__
+   <span class="hljs-number">21</span>: \x8c SHORT_BINUNICODE <span class="hljs-string">&#x27;A&#x27;</span>		  压栈A
+   <span class="hljs-number">24</span>: \x93 STACK_GLOBAL				 弹栈两次,压入__main__.A模块
+   <span class="hljs-number">25</span>: )    EMPTY_TUPLE					 压栈空元组()
+   <span class="hljs-number">26</span>: \x81 NEWOBJ						 弹栈两次,分别存入args,cls,执行cls.__new__(cls,())
+   <span class="hljs-number">27</span>: &#125;    EMPTY_DICT					  压栈空字典
+   <span class="hljs-number">28</span>: (    MARK						 将当前栈元素作为列表[A(),&#123;&#125;]压入前序栈,清空当前栈
+   <span class="hljs-number">29</span>: \x8c     SHORT_BINUNICODE <span class="hljs-string">&#x27;q&#x27;</span>	   压栈q
+   <span class="hljs-number">32</span>: \x8c     SHORT_BINUNICODE <span class="hljs-string">&#x27;w&#x27;</span>	   压栈w
+   <span class="hljs-number">35</span>: \x8c     SHORT_BINUNICODE <span class="hljs-string">&#x27;p&#x27;</span>	   压栈p
+   <span class="hljs-number">38</span>: \x8c     SHORT_BINUNICODE <span class="hljs-string">&#x27;z&#x27;</span>	   压栈z
+   <span class="hljs-number">41</span>: u        SETITEMS   (MARK at <span class="hljs-number">28</span>)    将当前栈的内容存入数组arr=[<span class="hljs-string">&#x27;q&#x27;</span>,<span class="hljs-string">&#x27;w&#x27;</span>,<span class="hljs-string">&#x27;p&#x27;</span>,<span class="hljs-string">&#x27;z&#x27;</span>],然后把当前栈恢复为调用mark前,现在当前栈剩下A(),&#123;&#125;.弹栈(规定是字典),两个一组读取arr,存入弹出的字典
+   <span class="hljs-number">42</span>: b    BUILD 						栈顶存进state,弹栈,栈顶存进inst,弹栈,用state来更新inst,得到的对象压栈
+   <span class="hljs-number">43</span>: .    STOP                          弹栈结束
+highest protocol among opcodes = <span class="hljs-number">4</span></code></pre>
+
+<p>原讲解见<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/89132768">https://zhuanlan.zhihu.com/p/89132768</a></p>
+<p>pickletools源码中存有详细的操作码介绍</p>
 
             </div>
             <hr>
@@ -263,7 +294,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/shell/">shell</a>
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
                     
                   </div>
                 
@@ -276,9 +307,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/22/Python-Pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+                      <a href="/2020/08/22/php-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python Pickle反序列化</span>
+                        <span class="hidden-mobile">php 反序列化漏洞</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -286,8 +317,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/21/owasp-top-10/">
-                        <span class="hidden-mobile">owasp top 10</span>
+                      <a href="/2020/08/22/awk-%E7%94%A8%E6%B3%95/">
+                        <span class="hidden-mobile">awk 用法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -430,7 +461,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "awk 用法&nbsp;",
+        "Python Pickle反序列化&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
