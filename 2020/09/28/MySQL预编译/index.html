@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      475 字
+      485 字
     </span>
   
 
@@ -226,11 +226,9 @@ execute f using @id;</code></pre>
 
 <p><code>prepare 名称 from &#39;sql语句&#39;</code>（使用占位符替代参数）</p>
 <p>sql语句可以是通过任意方式构造的字符串类型变量或值</p>
-<pre><div class="caption"><span>PREPARE f;```删除预编译语句</span></div><code class="hljs DEALLOCATE">
-### 0x02 能预编译的语句
-
-&#96;&#96;&#96;mysql
-ALTER TABLE
+<pre><code class="hljs mysql">DEALLOCATE PREPARE f;</code></pre>
+<p>删除预编译语句,或者在mysql连接session关闭时自动删除</p>
+<h3 id="0x02-能预编译的语句"><a href="#0x02-能预编译的语句" class="headerlink" title="0x02 能预编译的语句"></a>0x02 能预编译的语句</h3><pre><code class="hljs mysql">ALTER TABLE
 ALTER USER
 ANALYZE TABLE
 CACHE INDEX
