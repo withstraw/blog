@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="foon">
   <meta name="keywords" content="">
-  <title>Python Requests库简单使用 - 小破站</title>
+  <title>MySQL预编译 - 小破站</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-21 16:38" pubdate>
-        2020年9月21日 下午
+      <time datetime="2020-09-28 19:33" pubdate>
+        2020年9月28日 晚上
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      238 字
+      475 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      6
        分钟
     </span>
   
@@ -217,68 +217,66 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Python Requests库简单使用</h1>
+            <h1 style="display: none">MySQL预编译</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="Python-Requests库简单使用"><a href="#Python-Requests库简单使用" class="headerlink" title="Python Requests库简单使用"></a>Python Requests库简单使用</h2><h3 id="0x1-requests-get"><a href="#0x1-requests-get" class="headerlink" title="0x1 requests.get"></a>0x1 requests.get</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
-url=<span class="hljs-string">&#x27;http://www.exmaple.com&#x27;</span>
-headers=&#123;
-    <span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>
-&#125;
-r=requests.get(url)
-<span class="hljs-comment">#自定义请求头</span>
-r=requests.get(url,headers=headers)
-r.status_code  <span class="hljs-comment">#状态吗</span>
+              <h2 id="MySQL预编译"><a href="#MySQL预编译" class="headerlink" title="MySQL预编译"></a>MySQL预编译</h2><h3 id="0x01使用方法"><a href="#0x01使用方法" class="headerlink" title="0x01使用方法"></a>0x01使用方法</h3><pre><code class="hljs mysql">prepare f from &#39;select * from user where id &#x3D; ?&#39;;
+set @id&#x3D;1;
+execute f using @id;</code></pre>
 
-r.content   <span class="hljs-comment">#二进制字节码</span>
+<p><code>prepare 名称 from &#39;sql语句&#39;</code>（使用占位符替代参数）</p>
+<p>sql语句可以是通过任意方式构造的字符串类型变量或值</p>
+<pre><div class="caption"><span>PREPARE f;```删除预编译语句</span></div><code class="hljs DEALLOCATE">
+### 0x02 能预编译的语句
 
-r.text       <span class="hljs-comment">#文本格式响应</span></code></pre>
-
-<h3 id="0x2-requests-post"><a href="#0x2-requests-post" class="headerlink" title="0x2 requests.post"></a>0x2 requests.post</h3><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests
-data=&#123;
-<span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>
-&#125;
-cookies=&#123;
-<span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-string">&quot;bar&quot;</span>
-&#125;
-files=&#123;
-<span class="hljs-string">&quot;foo1&quot;</span>:<span class="hljs-string">&quot;filelikeobject&quot;</span>
-<span class="hljs-string">&quot;foo2&quot;</span>:(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;content&quot;</span>,<span class="hljs-string">&quot;/imge/png&quot;</span>)
-&#125;
-url=<span class="hljs-string">&quot;http://httpbin.org/post&quot;</span>
-<span class="hljs-comment">#上传数据</span>
-r=requests.post(url,data=<span class="hljs-string">&quot;l am in body&quot;</span>)
-<span class="hljs-comment">#上传表单数据</span>
-r=requests.post(url,data=data)
-<span class="hljs-comment">#上传文件</span>
-r=requests.post(url,files=files)
-<span class="hljs-comment">#带有cookies</span>
-r=requests.post(url,cookies=cookies)
-r.text</code></pre>
-
-<h3 id="0x3-session"><a href="#0x3-session" class="headerlink" title="0x3 session"></a>0x3 session</h3><pre><code class="hljs routeros">import requests
-<span class="hljs-attribute">url</span>=<span class="hljs-string">&quot;http://httpbin.org&quot;</span>
-<span class="hljs-attribute">s</span>=requests.session()
-s.<span class="hljs-builtin-name">get</span>(url)
-s.post(url)</code></pre>
-
-<pre><code class="hljs qml"><span class="hljs-keyword">import</span> requests
-<span class="hljs-built_in">url</span>=<span class="hljs-string">&quot;http://httpbin.org&quot;</span>
-<span class="hljs-keyword">with</span> requests.Session() <span class="hljs-keyword">as</span> <span class="hljs-attribute">s</span>:
-	s.get(<span class="hljs-built_in">url</span>)
-	s.post(<span class="hljs-built_in">url</span>)
-</code></pre>
-
-<p>0x4 proxy</p>
-<pre><code class="hljs makefile">import requests
-url=<span class="hljs-string">&quot;http://httpbin.org&quot;</span>
-proxies=&#123;
-<span class="hljs-string">&quot;http&quot;</span>:<span class="hljs-string">&quot;127.0.0.1:7777&quot;</span>,
-<span class="hljs-string">&quot;https&quot;</span>:<span class="hljs-string">&quot;127.0.0.1:777&quot;</span>
-&#125;
-r=requests.get(url,proxies=proxies)</code></pre>
+&#96;&#96;&#96;mysql
+ALTER TABLE
+ALTER USER
+ANALYZE TABLE
+CACHE INDEX
+CALL
+CHANGE MASTER
+CHECKSUM &#123;TABLE | TABLES&#125;
+COMMIT
+&#123;CREATE | DROP&#125; INDEX
+&#123;CREATE | RENAME | DROP&#125; DATABASE
+&#123;CREATE | DROP&#125; TABLE
+&#123;CREATE | RENAME | DROP&#125; USER
+&#123;CREATE | DROP&#125; VIEW
+DELETE
+DO
+FLUSH &#123;TABLE | TABLES | TABLES WITH READ LOCK | HOSTS | PRIVILEGES
+  | LOGS | STATUS | MASTER | SLAVE | USER_RESOURCES&#125;
+GRANT
+INSERT
+INSTALL PLUGIN
+KILL
+LOAD INDEX INTO CACHE
+OPTIMIZE TABLE
+RENAME TABLE
+REPAIR TABLE
+REPLACE
+RESET &#123;MASTER | SLAVE&#125;
+REVOKE
+SELECT
+SET
+SHOW &#123;WARNINGS | ERRORS&#125;
+SHOW BINLOG EVENTS
+SHOW CREATE &#123;PROCEDURE | FUNCTION | EVENT | TABLE | VIEW&#125;
+SHOW &#123;MASTER | BINARY&#125; LOGS
+SHOW &#123;MASTER | SLAVE&#125; STATUS
+SLAVE &#123;START | STOP&#125;
+TRUNCATE TABLE
+UNINSTALL PLUGIN
+UPDATE</code></pre>
 
 
+
+<h3 id="0x03防止sql注入的原理"><a href="#0x03防止sql注入的原理" class="headerlink" title="0x03防止sql注入的原理"></a>0x03防止sql注入的原理</h3><p>预编译一条sql语句，会将该sql语句编译后放到缓冲区中，待到execute执行语句时，将参数带入占位符再次进行解析，并执行。由于编译阶段已经识别了关键字，执行逻辑，输入的参数只能被作为字符串处理，无法做查询等操作了</p>
+<h3 id="0x04-模拟预编译"><a href="#0x04-模拟预编译" class="headerlink" title="0x04 模拟预编译"></a>0x04 模拟预编译</h3><p>模拟预编译是为了防止某些版本的数据库不支持预编译，模拟预编译会在程序内部模拟数据库预处理的过程。也就是说，程序在内部模拟prepare,等到execute时，再将拼接后的完整sql语句发送给mysql数据库进行查询。</p>
+<p>php模拟预编译本质上只是转义用户输入，相关函数是PDO::quote和mysqli_real_escape_string。</p>
+<p>PDO可以通过PDO::ATTR_EMULATE_PREPARES参数控制是否开启模拟预编译，默认开启</p>
+<h3 id="0x05预编译一定能防sql注入吗"><a href="#0x05预编译一定能防sql注入吗" class="headerlink" title="0x05预编译一定能防sql注入吗"></a>0x05预编译一定能防sql注入吗</h3><p>在prepare过程中的字符串拼接可能导致sql注入</p>
 
             </div>
             <hr>
@@ -289,7 +287,7 @@ r=requests.get(url,proxies=proxies)</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                      <a class="hover-with-bg" href="/tags/mysql/">mysql</a>
                     
                   </div>
                 
@@ -302,18 +300,12 @@ r=requests.get(url,proxies=proxies)</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/28/MySQL%E9%A2%84%E7%BC%96%E8%AF%91/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL预编译</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/22/php-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/">
-                        <span class="hidden-mobile">php 反序列化漏洞</span>
+                      <a href="/2020/09/21/Python-Requests%E5%BA%93%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">
+                        <span class="hidden-mobile">Python Requests库简单使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -456,7 +448,7 @@ r=requests.get(url,proxies=proxies)</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Python Requests库简单使用&nbsp;",
+        "MySQL预编译&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
