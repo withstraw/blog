@@ -229,8 +229,7 @@
 <h3 id="0x03CSP做了什么"><a href="#0x03CSP做了什么" class="headerlink" title="0x03CSP做了什么"></a>0x03CSP做了什么</h3><p>CSP实质上是限制了html引用外部资源的源和外部资源的权限，来自某些origin的资源可以被执行，某些资源被当作静态资源</p>
 <h3 id="0x04用法"><a href="#0x04用法" class="headerlink" title="0x04用法"></a>0x04用法</h3><p><code>Content-Security-Policy: policy</code></p>
 <p>policy由一系列策略指令组成<code>Content-Security: default-src &lt;src&gt; &lt;src&gt;;script-src &lt;src&gt;</code></p>
-<p>&lt;source&gt;</p>
-<p>&lt;source&gt;可以是</p>
+<h4 id="lt-source-gt"><a href="#lt-source-gt" class="headerlink" title="&lt;source&gt;"></a>&lt;source&gt;</h4><p>&lt;source&gt;可以是</p>
 <pre><code class="hljs vim"><span class="hljs-symbol">&lt;host-source&gt;</span>:scheme://hostname_or_ip:port 例如:http://*.example.<span class="hljs-keyword">com</span>、mail.example.<span class="hljs-keyword">com</span>:<span class="hljs-number">443</span>、http<span class="hljs-variable">s:</span>//store.example.<span class="hljs-keyword">com</span>
 <span class="hljs-symbol">&lt;scheme-source&gt;</span>:schem<span class="hljs-variable">a:</span>//允许的协议名有http:、http<span class="hljs-variable">s:</span>、不推荐(dat<span class="hljs-variable">a:</span>、mediastream:、blo<span class="hljs-variable">b:</span>、filesystem:)
 <span class="hljs-string">&#x27;self&#x27;</span>:指向与要保护的文件所在的源
@@ -241,8 +240,7 @@
 <span class="hljs-string">&#x27;strict-dynamic&#x27;</span>
 ……</code></pre>
 
-<p>策略指令</p>
-<pre><code class="hljs groovy"><span class="hljs-keyword">default</span>-<span class="hljs-attr">src:</span>在资源不符合任何策略时的默认策略
+<h4 id="策略指令"><a href="#策略指令" class="headerlink" title="策略指令"></a>策略指令</h4><pre><code class="hljs groovy"><span class="hljs-keyword">default</span>-<span class="hljs-attr">src:</span>在资源不符合任何策略时的默认策略
 script-<span class="hljs-attr">src:</span> javascript资源，包含&lt;script&gt;元素、事件处理器(onclick)、可以引发脚本执行的XSLT stylesheets，还可以指定report-sample报告违反策略的样本
 child-<span class="hljs-attr">src:</span>&lt;frame&gt;&lt;iframe&gt;元素加载的资源（如果没有frame-src策略）
 form-<span class="hljs-attr">action:</span> 限制表单的提交地址
