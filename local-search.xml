@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>WebSocket</title>
+    <link href="/2020/10/02/WebSocket/"/>
+    <url>/2020/10/02/WebSocket/</url>
+    
+    <content type="html"><![CDATA[<h2 id="WebSocket协议"><a href="#WebSocket协议" class="headerlink" title="WebSocket协议"></a>WebSocket协议</h2><h3 id="0x01-由来"><a href="#0x01-由来" class="headerlink" title="0x01 由来"></a>0x01 由来</h3><p>websocket协议是为了解决在http协议中使用双向传输的不便而提出的，例如游戏应用和即时信息就需要服务器向客户端发送数据。</p><p>使用http协议来进行双向传输导致的问题：</p><ul><li>服务器需要和每个不同的客户端建立很多tcp链接，向客户端传输数据需要一个链接，接受信息又需要一个</li><li>每个信息都需要http头部</li><li>客户端需要记录outgoing链接和incoming链接的对应关系</li></ul><p>解决这个问题的方法就是用一个tcp链接来进行双向传输，websocket正是这么做的。</p><p>websocket使用80（ws），445端口（wss）。websocket在握手阶段使用http协议，体现为提升协议。这样websocket可以支持已有的http代理和中间件。</p><h3 id="0x02-协议内容"><a href="#0x02-协议内容" class="headerlink" title="0x02 协议内容"></a>0x02 协议内容</h3><p>协议包含两部分:handshake（握手，挥手）和数据传输</p><h4 id="握手"><a href="#握手" class="headerlink" title="握手"></a>握手</h4><p>客户端的握手类似于</p><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/chat</span> HTTP/1.1<span class="hljs-attribute">Host</span>: server.example.com<span class="hljs-attribute">Upgrade</span>: websocket<span class="hljs-attribute">Connection</span>: Upgrade<span class="hljs-attribute">Sec-WebSocket-Key</span>: dGhlIHNhbXBsZSBub25jZQ==<span class="hljs-attribute">Origin</span>: http://example.com<span class="hljs-attribute">Sec-WebSocket-Protocol</span>: chat, superchat<span class="hljs-attribute">Sec-WebSocket-Version</span>: 13</code></pre><p>服务器端的握手类似于</p><pre><code class="hljs http">HTTP/1.1 <span class="hljs-number">101</span> Switching Protocols<span class="hljs-attribute">Upgrade</span>: websocket<span class="hljs-attribute">Connection</span>: Upgrade<span class="hljs-attribute">Sec-WebSocket-Accept</span>: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=<span class="hljs-attribute">Sec-WebSocket-Protocol</span>: chat</code></pre><ul><li>Sec-WebSocket-Key、Sec-WebSocket-Accept字段用于认证身份，保证双方都经过了WebSocket握手阶段，而不是攻击者冒充</li><li>Upgrade和Connection字段，用于提升http协议为websocket协议</li><li>Sec-WebSocket-Protocol （可选字段）<ul><li>客户端，列出客户端允许哪些WebSocket子协议</li><li>服务器端，从客户端允许的列表中选择1或0个。</li></ul></li><li>Cookie、Sec-WebSocket-Extension等可选字段</li></ul><p>握手过程</p><ol><li><p>首先双方建立tcp链接</p></li><li><p>客户端发送握手报文，报文中带有Sec-WebSocket-Key</p></li><li><p>服务器端接受报文，将客户端发送的Sec-WebSocket-Key拼接上预定义的GUID（全局身份标识符），sha1加密为base64格式字符串，写入Sec-WebSocket-Accept字段，服务器端发送握手报文，状态码为101（任何非101状态码代表拒绝链接，如前文所说）</p></li><li><p>客户端接受报文，检查状态码是否为101,Sec-WebSocket-Accept字段是否正确，否则不建立链接</p></li></ol><h4 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h4><p>成功握手后，服务器端和客户端就开始互相传输数据，在websocket协议中，数据又被叫做messages,一条message有一个或多个frames组成。websocket message可能会在网络层被分割为特殊的frame，之后再组合</p><p>一个frame会有一个type.相同message的每个frame的type是一样的。大致上，types区分了</p><p>文本数据（会被解析为utf-8文本）、二进制数据（交由应用解析）、控制信息（control frames 一般不携带数据，携带协议层的控制信号，例如关闭链接信号）。当前协议版本定义了六种frame types,保留10种</p><h4 id="挥手"><a href="#挥手" class="headerlink" title="挥手"></a>挥手</h4><ol><li>链接双方a,b中的一方a发送控制frame来关闭链接，发送控制frame后停止发送其他数据</li><li>另一方b收到，回复一个控制frame，</li><li>a收到，不再接受数据</li><li>当服务器收到关闭请求，立即tcp4次挥手。当客户端收到，等待服务器开始4次挥手</li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>web</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>内容安全策略CSP</title>
     <link href="/2020/09/29/%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5CSP/"/>
     <url>/2020/09/29/%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5CSP/</url>
