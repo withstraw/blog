@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>tcp四次挥手</title>
+    <link href="/2020/10/02/tcp%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/"/>
+    <url>/2020/10/02/tcp%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/</url>
+    
+    <content type="html"><![CDATA[<h2 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h2><h3 id="0x01过程"><a href="#0x01过程" class="headerlink" title="0x01过程"></a>0x01过程</h3><p>tcp连接是双工通道，双方都可以断开连接。假设链接双方为a,b</p><ol><li>a发送FIN=n报文，请求断开连接。进入FIN_WAIT1状态，发送FIN报文后不再发送任何数据，仅接受并确认报文</li><li>b收到FIN报文，回复ACK=n+1报文。b进入CLOSE_WAIT状态,a进入FIN_WAIT2状态</li><li>如果b有数据要发送，则继续发送。发送完成后发送FIN=m报文。b进入LAST_ACK状态，a进入TIME_WAIT状态</li><li>a回复ACK=m+1报文。如果a没有回复，b在超时后同样断开连接</li></ol><p>事实上，有些类似于a,b之间存在两条通道</p><p>一条是a&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;b,a发送，b接收</p><p>一条是a&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;b,a接受，b发送</p><p>每次FIN报文断开一条通道</p><h3 id="0x02抓包"><a href="#0x02抓包" class="headerlink" title="0x02抓包"></a>0x02抓包</h3><p><img src="/home/foon/Blog/source/_posts/tcp%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/image-20201002153438459.png" alt="image-20201002153438459"></p><p>但是，也存在一种可能性，如果被动关闭端b没有数据要发送，可以将第二次第三次挥手合并</p><pre><code class="hljs routeros">It is also possible <span class="hljs-keyword">to</span> terminate the<span class="hljs-built_in"> connection </span>by a 3-way handshake, when host A sends a FIN <span class="hljs-keyword">and</span> host B replies with a FIN &amp; ACK (merely combines 2 steps into one) <span class="hljs-keyword">and</span> host A replies with an ACK.</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>web</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>WebSocket</title>
     <link href="/2020/10/02/WebSocket/"/>
     <url>/2020/10/02/WebSocket/</url>
