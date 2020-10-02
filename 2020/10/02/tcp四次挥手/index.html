@@ -231,9 +231,10 @@
 <p>一条是a&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;b,a发送，b接收</p>
 <p>一条是a&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;b,a接受，b发送</p>
 <p>每次FIN报文断开一条通道</p>
-<h3 id="0x02抓包"><a href="#0x02抓包" class="headerlink" title="0x02抓包"></a>0x02抓包</h3><p><img src="/home/foon/Blog/source/_posts/tcp%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/image-20201002153438459.png" srcset="/img/loading.gif" alt="image-20201002153438459"></p>
+<h3 id="0x02抓包"><a href="#0x02抓包" class="headerlink" title="0x02抓包"></a>0x02抓包</h3><p><img src="image-20201002153438459.png" srcset="/img/loading.gif" alt="image-20201002153438459"></p>
 <p>但是，也存在一种可能性，如果被动关闭端b没有数据要发送，可以将第二次第三次挥手合并</p>
 <pre><code class="hljs routeros">It is also possible <span class="hljs-keyword">to</span> terminate the<span class="hljs-built_in"> connection </span>by a 3-way handshake, when host A sends a FIN <span class="hljs-keyword">and</span> host B replies with a FIN &amp; ACK (merely combines 2 steps into one) <span class="hljs-keyword">and</span> host A replies with an ACK.</code></pre>
+
             </div>
             <hr>
             <div>
