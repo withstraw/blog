@@ -167,12 +167,18 @@
                 
 
 <div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
+  <p class="h4">共计 12 篇文章</p>
   <hr>
   
     
       
       <p class="h5">2020</p>
+    
+    <a href="/2020/10/06/TLS%E5%88%9D%E7%AA%A5/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">TLS初窥</span>
+      <time style="float: right;">10-06</time>
+    </a>
+  
     
     <a href="/2020/10/02/tcp%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">tcp四次挥手</span>
@@ -227,13 +233,19 @@
       <time style="float: right;">08-21</time>
     </a>
   
-    
-    <a href="/2020/08/19/tcp-ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">tcp/ip网络模型</span>
-      <time style="float: right;">08-19</time>
-    </a>
-  
 </div>
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
