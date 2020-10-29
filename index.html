@@ -186,8 +186,7 @@
             
           
           Nginx 11个阶段post_read阶段在nginx处理完请求首行url和请求头部header之后，对原始头部进行处理，例如realip模块在这个阶段获取可能经过代理的真实ip地址，通过X-Forwarded-For :ip1,ip2,ip3或X-Real-Ip:ip1头部来获取。
-server_rewrite阶段通过server块中的配置进行rewrite
-包括rewrite、return指
+server_rewrite阶段匹配server,顺序为准确匹配-&gt;以*开头-&gt;以*结尾-&gt;依
         </a>
       </p>
 
