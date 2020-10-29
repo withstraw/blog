@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="foon">
   <meta name="keywords" content="">
-  <title>TLS初窥 - 小破站</title>
+  <title>Nginx 11个阶段 - 小破站</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-10-06 16:50" pubdate>
-        2020年10月6日 下午
+      <time datetime="2020-10-29 10:46" pubdate>
+        2020年10月29日 上午
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      340 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      4
        分钟
     </span>
   
@@ -217,43 +217,24 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">TLS初窥</h1>
+            <h1 style="display: none">Nginx 11个阶段</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="TLS初窥"><a href="#TLS初窥" class="headerlink" title="TLS初窥"></a>TLS初窥</h2><h3 id="TLS位于哪一层"><a href="#TLS位于哪一层" class="headerlink" title="TLS位于哪一层"></a>TLS位于哪一层</h3><p>TLS建立于TCP之上，处于应用层和传输层之间。在OSI七层协议中，TLS握手协议属于会话层，TLS记录协议属于表示层。（但是有一种说法为TCP/ip五层协议其实是把OSI七层协议的上三层合为一个，也就是把应用层，表示层，会话层合为应用层，这么说的话是应用层也没错。）</p>
-<p><img src="/home/foon/Blog/source/_posts/TLS%E5%88%9D%E7%AA%A5/SSL%E7%BB%93%E6%9E%84.png" srcset="/img/loading.gif" alt="SSL结构"></p>
-<h3 id="TLS握手协议"><a href="#TLS握手协议" class="headerlink" title="TLS握手协议"></a>TLS握手协议</h3><p><img src="/home/foon/Blog/source/_posts/TLS%E5%88%9D%E7%AA%A5/5bf4acc4377c4.png" srcset="/img/loading.gif" alt="image"></p>
-<ol>
-<li>Client Hello:客户端发送自己的tls协议版本，一个随机数random_c,支持的加密套件（按优先级从高到低）</li>
-<li>Server Hello:服务器端的tls协议版本，一个随机数random_s,选择的加密套件</li>
-<li>Certificate:服务器端证书链（客户端验证证书链，取出公钥）</li>
-<li>Server Hello Done: Hello阶段结束</li>
-<li>Client Key Exchange: 客户端生成随机数pre master key,用服务器端公钥加密后发送，服务器和客户端用相同的算法，random_c,random_s,pre master key,生成用于对称加密的密钥</li>
-<li>接下来的四步是一个单独的协议（Change Cipher Spec协议）</li>
-</ol>
-<h4 id="Change-Cipher-Spec协议"><a href="#Change-Cipher-Spec协议" class="headerlink" title="Change Cipher Spec协议"></a>Change Cipher Spec协议</h4><p><img src="/home/foon/Blog/source/_posts/TLS%E5%88%9D%E7%AA%A5/%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5.png" srcset="/img/loading.gif" alt="第四阶段"></p>
-<p>客户机启动SSL握手第4阶段，使服务器结束。该阶段分为4步，前2个消息来自客户机，后2个消息来自服务器。</p>
-<p>建立起一个安全的连接，客户端发送一个Change Cipher Spec消息，并且把协商得到的CipherSuite拷贝到当前连接的状态之中。然后，客户端用新的算法、密钥参数发送一个Finished消息，这条消息可以检查密钥交换和认证过程是否已经成功。其中包括一个校验值，对客户端整个握手过程的消息进行校验。服务器同样发送Change Cipher Spec消息和Finished消息。握手过程完成，客户端和服务器可以交换应用层数据进行通信。</p>
-<h5 id="ChangeCipherSpec"><a href="#ChangeCipherSpec" class="headerlink" title="ChangeCipherSpec"></a><strong>ChangeCipherSpec</strong></h5><p>编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送（<strong>ChangeCipherSpec</strong>是一个独立的协议，体现在数据包中就是一个字节的数据，用于告知服务端，客户端已经切换到之前协商好的加密套件（Cipher Suite）的状态，准备使用之前协商好的加密套件加密数据并传输了）。</p>
-<p><img src="/home/foon/Blog/source/_posts/TLS%E5%88%9D%E7%AA%A5/ClientChangeCipher.png" srcset="/img/loading.gif" alt="ClientChangeCipher"></p>
-<p>图：Cipher Spec Message报文</p>
-<blockquote>
-<p>是一条事件消息。</p>
-</blockquote>
-<h5 id="Clinet-Finished"><a href="#Clinet-Finished" class="headerlink" title="Clinet Finished:"></a><strong>Clinet Finished:</strong></h5><p><strong>客户端握手结束通知</strong>, 表示客户端的握手阶段已经结束。这一项同时也是前面发送的所有内容的hash值，用来供服务器校验（使用<strong>HMAC算法</strong>计算收到和发送的所有握手消息的摘要，然后通过RFC5246中定义的一个伪函数<a target="_blank" rel="noopener" href="http://tools.ietf.org/html/rfc5246#section-5">PRF</a>计算出结果，加密后发送。此数据是为了在正式传输应用数据之前对刚刚握手建立起来的加解密通道进行验证。）</p>
-<h5 id="Server-Finished"><a href="#Server-Finished" class="headerlink" title="Server Finished:"></a><strong>Server Finished:</strong></h5><p>服务端握手结束通知。</p>
-<ol>
-<li>使用私钥解密加密的Pre-master数据，基于之前(Client Hello 和 Server Hello)交换的两个明文随机数 random_C 和 random_S，计算得到协商密钥:enc_key=Fuc(random_C, random_S, Pre-Master);</li>
-<li>计算之前所有接收信息的 hash 值，然后解密客户端发送的 encrypted_handshake_message，验证数据和密钥正确性;</li>
-<li>发送一个 ChangeCipherSpec（告知客户端已经切换到协商过的加密套件状态，准备使用加密套件和 Session Secret加密数据了）</li>
-<li>服务端也会使用 Session Secret 加密一段 Finish 消息发送给客户端，以验证之前通过握手建立起来的加解密通道是否成功。</li>
-</ol>
-<p>根据之前的握手信息，如果客户端和服务端都能对Finish信息进行正常加解密且消息正确的被验证，则说明握手通道已经建立成功，接下来，双方可以使用上面产生的Session Secret对数据进行加密传输了。</p>
-<h3 id="TLS记录协议"><a href="#TLS记录协议" class="headerlink" title="TLS记录协议"></a>TLS记录协议</h3><h3 id="浏览器将TLS密钥存储为文件"><a href="#浏览器将TLS密钥存储为文件" class="headerlink" title="浏览器将TLS密钥存储为文件"></a>浏览器将TLS密钥存储为文件</h3><p>设置环境变量SSLKEYLOGFILE=/path/to/file,浏览器会将tls协议使用的密钥保存在该文件中。</p>
-<h3 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h3><p>TLS握手阶段协商了使用的加密套件，例如TLS_AES_128_GCM_SHA_256。</p>
-<p>三个随机数random_c,random_s,pre master key用于生成对称加密密钥。该密钥用于后续数据传输。用三个随机数的原因是担心使用了伪随机算法，导致随机数可以被猜测。使用三个随机数，即使他们都是伪随机数，也很难被猜出。</p>
-<p>服务端通过证书证明自己的身份，客户端用证书中的公钥来来加密数据。使用公私钥加密来传输对称加密密钥也是常见手段。</p>
-<p>最后的Change Cipher Spec有点像tcp四次挥手，双方先后改变自己的状态（在这里切换到加密套件，tcp是改变通道的读写属性）</p>
+              <h1 id="Nginx-11个阶段"><a href="#Nginx-11个阶段" class="headerlink" title="Nginx 11个阶段"></a>Nginx 11个阶段</h1><h2 id="post-read阶段"><a href="#post-read阶段" class="headerlink" title="post_read阶段"></a>post_read阶段</h2><p>在nginx处理完请求首行url和请求头部header之后，对原始头部进行处理，例如realip模块在这个阶段获取可能经过代理的真实ip地址，通过X-Forwarded-For :ip1,ip2,ip3或X-Real-Ip:ip1头部来获取。</p>
+<h2 id="server-rewrite阶段"><a href="#server-rewrite阶段" class="headerlink" title="server_rewrite阶段"></a>server_rewrite阶段</h2><p>通过server块中的配置进行rewrite</p>
+<p>包括rewrite、return指令</p>
+<h2 id="find-config阶段"><a href="#find-config阶段" class="headerlink" title="find_config阶段"></a>find_config阶段</h2><p>对location进行匹配</p>
+<p>顺序为准确匹配-&gt;以*开头-&gt;以*结尾-&gt;依照顺序匹配正则表达式-&gt;最长的不完全匹配</p>
+<h2 id="rewrite阶段"><a href="#rewrite阶段" class="headerlink" title="rewrite阶段"></a>rewrite阶段</h2><p>通过location中的配置进行rewrite</p>
+<h2 id="preaccess阶段"><a href="#preaccess阶段" class="headerlink" title="preaccess阶段"></a>preaccess阶段</h2><p>三个access阶段都为访问管理阶段，pre_access限制ip。包括模块preaccess，会从connection、requests方面对ip进行限制。ngx_limit_req、nginx_limit_zone;</p>
+<h2 id="access阶段"><a href="#access阶段" class="headerlink" title="access阶段"></a>access阶段</h2><p>用户验证相关、ngx_auth_request模块。access限制用户名密码包括deny、allow指令，对authorization的验证，通过对ip地址、uri等的hash进行验证。</p>
+<h2 id="post-access阶段"><a href="#post-access阶段" class="headerlink" title="post_access阶段"></a>post_access阶段</h2><p>satisfy指令</p>
+<h2 id="try-files阶段"><a href="#try-files阶段" class="headerlink" title="try_files阶段"></a>try_files阶段</h2><p>try_file指令，按顺序对指令后的uri进行尝试，@location进行内部跳转。</p>
+<p>root,alias区别。一个是指定网站的根路径，一个是将uri映射为计算机上的路径，相当于一个别名。</p>
+<p>root html;————————-&gt;location /a   /a/b/c ===========html/a/b/c      (alias / html)</p>
+<p>alias html;————————-location /a /a/b/c============html/b/c</p>
+<h2 id="content阶段"><a href="#content阶段" class="headerlink" title="content阶段"></a>content阶段</h2><p>可能对响应内容进行修改，例如gzip_fileter、image_fileter等模块。</p>
+<h2 id="log阶段"><a href="#log阶段" class="headerlink" title="log阶段"></a>log阶段</h2><p>日志</p>
 
             </div>
             <hr>
@@ -264,7 +245,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/web/">web</a>
+                      <a class="hover-with-bg" href="/tags/nginx/">nginx</a>
                     
                   </div>
                 
@@ -277,18 +258,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/29/Nginx-11%E4%B8%AA%E9%98%B6%E6%AE%B5/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Nginx 11个阶段</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/10/02/tcp%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
-                        <span class="hidden-mobile">tcp四次挥手</span>
+                      <a href="/2020/10/06/TLS%E5%88%9D%E7%AA%A5/">
+                        <span class="hidden-mobile">TLS初窥</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -431,7 +406,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "TLS初窥&nbsp;",
+        "Nginx 11个阶段&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Nginx 11个阶段</title>
+    <link href="/2020/10/29/Nginx-11%E4%B8%AA%E9%98%B6%E6%AE%B5/"/>
+    <url>/2020/10/29/Nginx-11%E4%B8%AA%E9%98%B6%E6%AE%B5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Nginx-11个阶段"><a href="#Nginx-11个阶段" class="headerlink" title="Nginx 11个阶段"></a>Nginx 11个阶段</h1><h2 id="post-read阶段"><a href="#post-read阶段" class="headerlink" title="post_read阶段"></a>post_read阶段</h2><p>在nginx处理完请求首行url和请求头部header之后，对原始头部进行处理，例如realip模块在这个阶段获取可能经过代理的真实ip地址，通过X-Forwarded-For :ip1,ip2,ip3或X-Real-Ip:ip1头部来获取。</p><h2 id="server-rewrite阶段"><a href="#server-rewrite阶段" class="headerlink" title="server_rewrite阶段"></a>server_rewrite阶段</h2><p>通过server块中的配置进行rewrite</p><p>包括rewrite、return指令</p><h2 id="find-config阶段"><a href="#find-config阶段" class="headerlink" title="find_config阶段"></a>find_config阶段</h2><p>对location进行匹配</p><p>顺序为准确匹配-&gt;以*开头-&gt;以*结尾-&gt;依照顺序匹配正则表达式-&gt;最长的不完全匹配</p><h2 id="rewrite阶段"><a href="#rewrite阶段" class="headerlink" title="rewrite阶段"></a>rewrite阶段</h2><p>通过location中的配置进行rewrite</p><h2 id="preaccess阶段"><a href="#preaccess阶段" class="headerlink" title="preaccess阶段"></a>preaccess阶段</h2><p>三个access阶段都为访问管理阶段，pre_access限制ip。包括模块preaccess，会从connection、requests方面对ip进行限制。ngx_limit_req、nginx_limit_zone;</p><h2 id="access阶段"><a href="#access阶段" class="headerlink" title="access阶段"></a>access阶段</h2><p>用户验证相关、ngx_auth_request模块。access限制用户名密码包括deny、allow指令，对authorization的验证，通过对ip地址、uri等的hash进行验证。</p><h2 id="post-access阶段"><a href="#post-access阶段" class="headerlink" title="post_access阶段"></a>post_access阶段</h2><p>satisfy指令</p><h2 id="try-files阶段"><a href="#try-files阶段" class="headerlink" title="try_files阶段"></a>try_files阶段</h2><p>try_file指令，按顺序对指令后的uri进行尝试，@location进行内部跳转。</p><p>root,alias区别。一个是指定网站的根路径，一个是将uri映射为计算机上的路径，相当于一个别名。</p><p>root html;————————-&gt;location /a   /a/b/c ===========html/a/b/c      (alias / html)</p><p>alias html;————————-location /a /a/b/c============html/b/c</p><h2 id="content阶段"><a href="#content阶段" class="headerlink" title="content阶段"></a>content阶段</h2><p>可能对响应内容进行修改，例如gzip_fileter、image_fileter等模块。</p><h2 id="log阶段"><a href="#log阶段" class="headerlink" title="log阶段"></a>log阶段</h2><p>日志</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>nginx</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>TLS初窥</title>
     <link href="/2020/10/06/TLS%E5%88%9D%E7%AA%A5/"/>
     <url>/2020/10/06/TLS%E5%88%9D%E7%AA%A5/</url>
