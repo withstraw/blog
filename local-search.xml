@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>判断一个数是否是二的幂</title>
+    <link href="/2021/02/01/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E6%98%AF%E5%90%A6%E6%98%AF%E4%BA%8C%E7%9A%84%E5%B9%82/"/>
+    <url>/2021/02/01/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E6%98%AF%E5%90%A6%E6%98%AF%E4%BA%8C%E7%9A%84%E5%B9%82/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1"><a href="#1" class="headerlink" title="#1"></a>#1</h1><p>今天在学习go的库时，发现go的strconv库中的aoti.go文件中用到了一个函数,用来判断进制数base是否是2的幂次,2&lt;=base&lt;=40</p><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">isPowerOfTwo</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>)</span><span class="hljs-title">bool</span></span>&#123;<span class="hljs-keyword">return</span> x&amp;(x<span class="hljs-number">-1</span>)==<span class="hljs-number">0</span>&#125;</code></pre><p>我自己的想法是二的幂次转换成二进制一定是0b10000……00,只有最高位是1.这样的数在-1后有另一个特征，所有位全部改变了,并且位数减少了1位,变为0b011111……11,两数相与为0.这里有一个特殊情况，即0.</p><h1 id="2"><a href="#2" class="headerlink" title="#2"></a>#2</h1><p>途中查找资料时发现了另一种相似方法</p><pre><code class="hljs go"><span class="hljs-keyword">return</span> (i&amp;-i)==i</code></pre><p>这个-i其实包含了反码等一系列操作，反码啥的其实记不太清了。</p><p>不过这让我想起了负数的补码表示方法中的验证部分，-i=0-i=0b10000-i具体细节见</p><p>这也就可以跳跃到0b10000……00其实是一个0b10000……00进制的0,而-1后即变成了-1。似乎与模有些相关性，而且这个方法好像并不适用于非2的幂次的模，即不适用于判断如是否是3的幂次。这就与按位与运算扯上了关系。在此留下痕迹</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Nginx 11个阶段</title>
     <link href="/2020/10/29/Nginx-11%E4%B8%AA%E9%98%B6%E6%AE%B5/"/>
     <url>/2020/10/29/Nginx-11%E4%B8%AA%E9%98%B6%E6%AE%B5/</url>

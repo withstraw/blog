@@ -176,6 +176,51 @@
     
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
+        <a href="/2021/02/01/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E6%98%AF%E5%90%A6%E6%98%AF%E4%BA%8C%E7%9A%84%E5%B9%82/">判断一个数是否是二的幂</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/01/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E6%95%B0%E6%98%AF%E5%90%A6%E6%98%AF%E4%BA%8C%E7%9A%84%E5%B9%82/">
+          
+          
+            
+          
+          #1今天在学习go的库时，发现go的strconv库中的aoti.go文件中用到了一个函数,用来判断进制数base是否是2的幂次,2&lt;=base&lt;=40
+func isPowerOfTwo(x int)bool&#123;
+		return x&amp;(x-1)==0
+&#125;
+
+我自己的想法是二的幂次转换成二进制一定是0b10000……00,只有最高位是1.这样的数在-1后有另
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-01 12:26" pubdate>
+              2021-02-01
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/go/">go</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
         <a href="/2020/10/29/Nginx-11%E4%B8%AA%E9%98%B6%E6%AE%B5/">Nginx 11个阶段</a>
       </h1>
 
@@ -572,49 +617,6 @@ __dict__属性或__get
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        <a href="/2020/08/22/awk-%E7%94%A8%E6%B3%95/">awk 用法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/08/22/awk-%E7%94%A8%E6%B3%95/">
-          
-          
-            
-          
-          awk使用0x1 格式awk 选项 ‘BEGIN{action} pattern1 &amp;&amp; pattern2 || pattern3{action1}pattern4{action2;action3}END{action}’ 文件
-0x2 执行流程awk首先执行BEGIN代码块
-然后按照RS指定的分隔符从文件中读取文件，RS默认为\n,如果没有指定文件，则从标准输入读取
-每读取一条记
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-08-22 15:40" pubdate>
-              2020-08-22
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/shell/">shell</a>
             
           </div>
         

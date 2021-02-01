@@ -17,10 +17,23 @@
   <meta name="description" content="">
   <meta name="author" content="foon">
   <meta name="keywords" content="">
-  <title>归档 - 小破站</title>
+  <title>判断一个数是否是二的幂 - 小破站</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -43,7 +56,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,6 +160,43 @@
             </span>
 
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-01 12:26" pubdate>
+        2021年2月1日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      312 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
           
@@ -157,55 +207,89 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 14 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/08/21/owasp-top-10/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">owasp top 10</span>
-      <time style="float: right;">08-21</time>
-    </a>
-  
-    
-    <a href="/2020/08/19/tcp-ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">tcp/ip网络模型</span>
-      <time style="float: right;">08-19</time>
-    </a>
-  
-</div>
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2020/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2020/">1</a><span class="page-number current">2</span>
-    </span>
-  </nav>
-  
-  <script>
-    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
-      ele.href += '#board';
-    }
-  </script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">判断一个数是否是二的幂</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="1"><a href="#1" class="headerlink" title="#1"></a>#1</h1><p>今天在学习go的库时，发现go的strconv库中的aoti.go文件中用到了一个函数,用来判断进制数base是否是2的幂次,2&lt;=base&lt;=40</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">isPowerOfTwo</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>)</span><span class="hljs-title">bool</span></span>&#123;
+		<span class="hljs-keyword">return</span> x&amp;(x<span class="hljs-number">-1</span>)==<span class="hljs-number">0</span>
+&#125;</code></pre>
 
+<p>我自己的想法是二的幂次转换成二进制一定是0b10000……00,只有最高位是1.这样的数在-1后有另一个特征，所有位全部改变了,并且位数减少了1位,变为0b011111……11,两数相与为0.这里有一个特殊情况，即0.</p>
+<h1 id="2"><a href="#2" class="headerlink" title="#2"></a>#2</h1><p>途中查找资料时发现了另一种相似方法</p>
+<pre><code class="hljs go"><span class="hljs-keyword">return</span> (i&amp;-i)==i</code></pre>
 
+<p>这个-i其实包含了反码等一系列操作，反码啥的其实记不太清了。</p>
+<p>不过这让我想起了负数的补码表示方法中的验证部分，-i=0-i=0b10000-i具体细节见</p>
+<p>这也就可以跳跃到0b10000……00其实是一个0b10000……00进制的0,而-1后即变成了-1。似乎与模有些相关性，而且这个方法好像并不适用于非2的幂次的模，即不适用于判断如是否是3的幂次。这就与按位与运算扯上了关系。在此留下痕迹</p>
 
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/go/">go</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/29/Nginx-11%E4%B8%AA%E9%98%B6%E6%AE%B5/">
+                        <span class="hidden-mobile">Nginx 11个阶段</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -287,6 +371,31 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -294,7 +403,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "判断一个数是否是二的幂&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -309,6 +418,21 @@
 
 
 
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
 
 
   <script  src="/js/local-search.js" ></script>
@@ -322,6 +446,20 @@
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
 
 
 
