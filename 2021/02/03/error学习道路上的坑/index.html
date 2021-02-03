@@ -311,7 +311,7 @@
 e:=fmt.Errorf(<span class="hljs-string">&quot;abcd %w&quot;</span>,)
 errors.As(e,&amp;pe)</code></pre>
 
-<p>如果这里不写&amp;pe的话，就会panic,说pe没有实现error接口。原因是T类型实现了func (T)foo()函数，<em>T类型实现了func (\</em>T)foo()、func (T)foo()函数。官方wrapError为我们实现的是接收指针的。这里官方解释说把一个指针赋给一个指针比把指针赋给一个值要好。</p>
+<p>如果这里不写&amp;pe的话，就会panic,说pe没有实现error接口。原因是T类型实现了func (T)foo()函数，*T类型实现了func (*T)foo()、func (T)foo()函数。官方wrapError为我们实现的是接收指针的。这里官方解释说把一个指针赋给一个指针比把指针赋给一个值要好。</p>
 <p>感觉挺复杂的，具体的error如io.EOF是一个指针<code>io.EOF-&gt;stringError&#123;&quot;EOF&quot;&#125;</code>,上文的e是一个指针<code>e-&gt;wrapError&#123;msg,err-&gt;stringError&#125;</code>。这样写下来好像还挺有道理的，感觉自己修行尚浅。</p>
 
             </div>
