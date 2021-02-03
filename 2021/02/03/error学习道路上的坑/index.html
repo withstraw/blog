@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      618 字
+      627 字
     </span>
   
 
@@ -230,7 +230,10 @@
 <h1 id="2"><a href="#2" class="headerlink" title="#2"></a>#2</h1><p>go中最基本的error是一个包含了文本的结构体</p>
 <pre><code class="hljs go"><span class="hljs-keyword">type</span> errorString <span class="hljs-keyword">struct</span>&#123;
 	s <span class="hljs-keyword">string</span>
-&#125;</code></pre>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(e *errorString)</span> <span class="hljs-title">Error</span><span class="hljs-params">()</span> <span class="hljs-title">string</span></span> &#123;
+ 	<span class="hljs-keyword">return</span> e.s</code></pre>
 
 <p>他提供了一个api<code>New</code>以供创建error</p>
 <pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">New</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>)</span> <span class="hljs-title">error</span></span>&#123;
